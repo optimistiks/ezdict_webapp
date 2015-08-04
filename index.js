@@ -9,6 +9,8 @@ global.Router = require('react-router');
 require('jquery-slimscroll');
 require('bootstrap');
 
+require('./routing/routing.jsx');
+
 jQuery(function () {
   console.log(jQuery.fn.slimscroll);
 });
