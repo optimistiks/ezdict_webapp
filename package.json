@@ -14,7 +14,10 @@
     "i18next-client": "^1.10.2",
     "jquery": "^2.1.4",
     "jquery-slimscroll": "^1.3.6",
-    "parcelify": "^1.1.3"
+    "parcelify": "^1.1.3",
+    "react-router": "~0.13.3",
+    "react": "~0.13.3",
+    "babel": "~5.8.20"
   },
   "browser": {
     "jquery-slimscroll": "./node_modules/jquery-slimscroll/jquery.slimscroll.js"
