@@ -1,13 +1,14 @@
 var React = require('react');
+var t = require('../../app_modules/t');
 module.exports = React.createClass({
   render: function () {
     return (
       <table className="table">
         <thead>
         <tr>
-          <th>Текст</th>
-          <th>Сколько раз искали</th>
-          <th>Когда искали последний раз</th>
+          <th>{t('Text')}</th>
+          <th>{t('Translation count')}</th>
+          <th>{t('Last translation date')}</th>
         </tr>
         </thead>
         <tbody>

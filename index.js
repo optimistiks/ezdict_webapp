@@ -1,6 +1,12 @@
 global.jQuery = require('jquery');
-global.i18n = require('i18next-client');
-global.React = require('react');
-global.Router = require('react-router');
 require('bootstrap');
-require('./routing/routing.jsx');
+var React = require('react');
+var Router = require('react-router');
+var i18n = require('./app_modules/i18n');
+var routes = require('./app_modules/routes/routes.jsx');
+
+i18n.setLng('ru', function() {
+  Router.run(routes, function (Handler) {
+    React.render(<Handler/>, document.getElementById('content'));
+  });
+});
