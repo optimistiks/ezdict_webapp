@@ -30,7 +30,7 @@ module.exports = React.createClass({
               <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                  aria-expanded="false">optimistiks <span className="caret"></span></a>
               <ul className="dropdown-menu">
-                <li><a href="#">Профиль</a></li>
+                <NavLi to="profile">Профиль</NavLi>
                 <li role="separator" className="divider"></li>
                 <li><a href="#">Выход</a></li>
               </ul>
