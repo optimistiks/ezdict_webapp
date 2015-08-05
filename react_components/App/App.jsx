@@ -6,14 +6,8 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="container-fluid">
-        <div className="row">
-          <NavBar/>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <RouteHandler/>
-          </div>
-        </div>
+        <NavBar/>
+        <RouteHandler/>
       </div>
     );
   }

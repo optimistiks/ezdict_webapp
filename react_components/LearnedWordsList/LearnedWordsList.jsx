@@ -2,24 +2,11 @@ var React = require('react');
 module.exports = React.createClass({
   render: function () {
     return (
-      <table className="table">
-        <thead>
-        <tr>
-          <th>Слово</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Hello</td>
-        </tr>
-        <tr>
-          <td>World</td>
-        </tr>
-        <tr>
-          <td>Citizen</td>
-        </tr>
-        </tbody>
-      </table>
+      <ul className="list-inline">
+        <li><div className="alert alert-success" role="alert">bye bye</div></li>
+        <li><div className="alert alert-success" role="alert">what the</div></li>
+        <li><div className="alert alert-success" role="alert">dawg</div></li>
+      </ul>
     );
   }
 });

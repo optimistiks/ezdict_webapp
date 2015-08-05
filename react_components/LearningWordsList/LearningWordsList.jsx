@@ -1,25 +1,14 @@
 var React = require('react');
+var t = require('../../app_modules/t');
 module.exports = React.createClass({
   render: function () {
     return (
-      <table className="table">
-        <thead>
-        <tr>
-          <th>Слово</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>Hello</td>
-        </tr>
-        <tr>
-          <td>World</td>
-        </tr>
-        <tr>
-          <td>Citizen</td>
-        </tr>
-        </tbody>
-      </table>
+      <ul className="list-inline">
+        <li><div className="alert alert-info" role="alert">hello</div></li>
+        <li><div className="alert alert-info" role="alert">world</div></li>
+        <li><div className="alert alert-info" role="alert">stop right there criminal scum</div></li>
+        <li><div className="alert alert-info" role="alert">fuck</div></li>
+      </ul>
     );
   }
 });
