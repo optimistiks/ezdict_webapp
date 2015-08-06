@@ -1,6 +1,6 @@
 var React = require('react');
-var AuthCheck = require('../../react_mixins/AuthCheck');
-var UserProfile = require('../../react_components/UserProfile/UserProfile.jsx');
+var AuthCheck = require('../../mixins/AuthCheck');
+var UserProfile = require('../../components/UserProfile/UserProfile.jsx');
 module.exports = React.createClass({
   mixins: [AuthCheck],
   render: function () {

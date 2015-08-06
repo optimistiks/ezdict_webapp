@@ -1,6 +1,6 @@
 var React = require('react');
-var AuthCheck = require('../../react_mixins/AuthCheck');
-var TranslationHistoryList = require('../../react_components/TranslationHistoryList/TranslationHistoryList.jsx');
+var AuthCheck = require('../../mixins/AuthCheck');
+var TranslationHistoryList = require('../../components/TranslationHistoryList/TranslationHistoryList.jsx');
 var histories = [
   {word: "hello", date: "23.05.2045 23:24", count: "1"},
   {word: "citizen", date: "23.05.2045 23:24", count: "2"}

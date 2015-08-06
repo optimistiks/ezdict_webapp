@@ -6,13 +6,13 @@ var Redirect = Router.Redirect;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
-var TranslationHistoryPage= require('../../react_pages/TranslationHistoryPage/TranslationHistoryPage.jsx');
-var LearningWordsPage = require('../../react_pages/LearningWordsPage/LearningWordsPage.jsx');
-var LearnedWordsPage = require('../../react_pages/LearnedWordsPage/LearnedWordsPage.jsx');
-var MyArticlesPage = require('../../react_pages/MyArticlesPage/MyArticlesPage.jsx');
-var UserProfilePage = require('../../react_pages/UserProfilePage/UserProfilePage.jsx');
-var LoginPage = require('../../react_pages/LoginPage/LoginPage.jsx');
-var App = require('../../react_components/App/App.jsx');
+var TranslationHistoryPage= require('../../pages/TranslationHistoryPage/TranslationHistoryPage.jsx');
+var LearningWordsPage = require('../../pages/LearningWordsPage/LearningWordsPage.jsx');
+var LearnedWordsPage = require('../../pages/LearnedWordsPage/LearnedWordsPage.jsx');
+var MyArticlesPage = require('../../pages/MyArticlesPage/MyArticlesPage.jsx');
+var UserProfilePage = require('../../pages/UserProfilePage/UserProfilePage.jsx');
+var LoginPage = require('../../pages/LoginPage/LoginPage.jsx');
+var App = require('../../components/App/App.jsx');
 
 var routes = (
   <Route name="app" path="/" handler={App}>

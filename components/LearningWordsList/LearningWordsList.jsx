@@ -1,5 +1,5 @@
 var React = require('react');
-var t = require('../../app_modules/t');
+var t = require('../../modules/t');
 module.exports = React.createClass({
   render: function () {
     return (
