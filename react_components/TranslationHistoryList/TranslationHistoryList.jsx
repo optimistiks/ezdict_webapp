@@ -2,29 +2,20 @@ var React = require('react');
 var t = require('../../app_modules/t');
 module.exports = React.createClass({
   render: function () {
+    var historyNodes = this.props.histories.map(function (history) {
+      return (
+        <li>
+          <ul className="list-inline">
+            <li>{history.word}</li>
+            <li><span className="label label-success">{history.date}</span></li>
+            <li><span className="label label-info">{history.count}</span></li>
+          </ul>
+        </li>
+      );
+    });
     return (
       <ul className="list-unstyled">
-        <li>
-          <ul className="list-inline">
-            <li>hello</li>
-            <li><span className="label label-success">25.06.2012 15:03</span></li>
-            <li><span className="label label-info">1</span></li>
-          </ul>
-        </li>
-        <li>
-          <ul className="list-inline">
-            <li>hellos</li>
-            <li><span className="label label-success">25.06.2012 15:03</span></li>
-            <li><span className="label label-info">1</span></li>
-          </ul>
-        </li>
-        <li>
-          <ul className="list-inline">
-            <li>hello</li>
-            <li><span className="label label-success">25.06.2012 15:03</span></li>
-            <li><span className="label label-info">1</span></li>
-          </ul>
-        </li>
+        {historyNodes}
       </ul>
     );
   }
