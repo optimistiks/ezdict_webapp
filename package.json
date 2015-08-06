@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-prod": "browserify index.js -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]",
+    "build-prod": "browserify index.js -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ] && uglifyjs www/dist/bundle.js --compress --mangle --output www/dist/bundle.js",
     "build": "browserify index.js --debug -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]",
     "watch": "watchify index.js --debug --verbose -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]"
   },
