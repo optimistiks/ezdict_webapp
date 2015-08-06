@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build-prod": "browserify index.js -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ] && uglifyjs www/dist/bundle.js --compress --mangle --output www/dist/bundle.js",
-    "build": "browserify index.js --debug -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]",
+    "browserify": "browserify index.js --debug -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]",
+    "uglify": "uglifyjs www/dist/bundle.js --compress --mangle --output www/dist/bundle.js",
+    "build": "npm run browserify && npm run uglify",
     "watch": "watchify index.js --debug --verbose -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]"
   },
   "author": "",
@@ -15,14 +16,16 @@
     "bootstrap": "^3.3.5",
     "i18next-client": "^1.10.2",
     "jquery": "^2.1.4",
-    "jquery-slimscroll": "^1.3.6",
-    "parcelify": "^1.1.3",
     "react-router": "~0.13.3",
-    "react": "~0.13.3",
-    "babelify": "~6.1.3"
+    "react": "~0.13.3"
   },
-  "browser": {
-    "jquery-slimscroll": "./node_modules/jquery-slimscroll/jquery.slimscroll.js"
+  "devDependencies": {
+    "browserify": "~11.0.1",
+    "babelify": "~6.1.3",
+    "parcelify": "~1.1.3",
+    "watchify": "~3.3.1",
+    "uglify-js": "~2.4.24"
   },
+  "browser": {},
   "style": []
 }
