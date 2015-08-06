@@ -4,7 +4,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-xs-12">
           <MyArticlesList/>
         </div>
       </div>

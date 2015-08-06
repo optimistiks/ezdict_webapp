@@ -10,6 +10,7 @@ var TranslationHistoryPage= require('../../react_pages/TranslationHistoryPage/Tr
 var LearningWordsPage = require('../../react_pages/LearningWordsPage/LearningWordsPage.jsx');
 var LearnedWordsPage = require('../../react_pages/LearnedWordsPage/LearnedWordsPage.jsx');
 var MyArticlesPage = require('../../react_pages/MyArticlesPage/MyArticlesPage.jsx');
+var UserProfilePage = require('../../react_pages/UserProfilePage/UserProfilePage.jsx');
 var App = require('../../react_components/App/App.jsx');
 
 var routes = (
@@ -18,7 +19,7 @@ var routes = (
     <Route name="learning" handler={LearningWordsPage} />
     <Route name="learned" handler={LearnedWordsPage} />
     <Route name="my-articles" handler={MyArticlesPage} />
-    <Route name="profile" handler={LearningWordsPage} />
+    <Route name="profile" handler={UserProfilePage} />
     <Redirect from="/" to="history" />
   </Route>
 );
