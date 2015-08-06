@@ -11,6 +11,7 @@ var LearningWordsPage = require('../../react_pages/LearningWordsPage/LearningWor
 var LearnedWordsPage = require('../../react_pages/LearnedWordsPage/LearnedWordsPage.jsx');
 var MyArticlesPage = require('../../react_pages/MyArticlesPage/MyArticlesPage.jsx');
 var UserProfilePage = require('../../react_pages/UserProfilePage/UserProfilePage.jsx');
+var LoginPage = require('../../react_pages/LoginPage/LoginPage.jsx');
 var App = require('../../react_components/App/App.jsx');
 
 var routes = (
@@ -20,6 +21,7 @@ var routes = (
     <Route name="learned" handler={LearnedWordsPage} />
     <Route name="my-articles" handler={MyArticlesPage} />
     <Route name="profile" handler={UserProfilePage} />
+    <Route name="login" handler={LoginPage} />
     <Redirect from="/" to="history" />
   </Route>
 );
