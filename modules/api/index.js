@@ -141,7 +141,7 @@ api.login = function (formData) {
 };
 
 /**
- * call the logout endpoint and remove the token from Chrome sync storage
+ * call the logout endpoint and remove the token from storage
  * @returns {*}
  */
 api.logout = function () {

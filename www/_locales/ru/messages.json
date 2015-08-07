@@ -5,5 +5,11 @@
   "Username": "Имя пользователя",
   "Password": "Пароль",
   "Sign in": "Войти",
-  "Register": "Зарегистрироваться"
+  "Register": "Зарегистрироваться",
+  "Sign out": "Выйти",
+  "Translation history": "История переводов",
+  "Words to learn": "Изучаемые слова",
+  "Learned words": "Изученные слова",
+  "My translations": "Мои переводы",
+  "Profile": "Профиль"
 }

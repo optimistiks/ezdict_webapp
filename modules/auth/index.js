@@ -21,12 +21,22 @@ auth.isLoggedIn = function () {
   return def.promise();
 };
 
+auth.logout = function () {
+  return api.logout().done(function () {
+    this.userInfo = null;
+  }.bind(this))
+};
+
 auth.login = function (formData) {
   return api.login(formData)
 };
 
 auth.register = function (formData) {
   return api.register(formData)
+};
+
+auth.getUserInfo = function () {
+  return this.userInfo;
 };
 
 module.exports = auth;
