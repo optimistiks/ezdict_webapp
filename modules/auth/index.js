@@ -21,4 +21,8 @@ auth.isLoggedIn = function () {
   return def.promise();
 };
 
+auth.login = function (formData) {
+  return api.login(formData)
+};
+
 module.exports = auth;

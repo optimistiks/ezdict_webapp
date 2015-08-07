@@ -19,10 +19,19 @@ api.buildUrl = function (path) {
 };
 
 api.sendRequest = function (ajaxParams) {
+  var def = $.Deferred();
+
   this.addLocaleHeader(ajaxParams);
-  return $.ajax(ajaxParams).fail(function () {
-    console.error('Request failed', arguments);
-  });
+
+  $.ajax(ajaxParams)
+    .done(function (response) {
+      def.resolve(response);
+    }).fail(function (jqXHR) {
+      console.error('Request failed', arguments);
+      def.reject(jqXHR.responseJSON);
+    });
+
+  return def.promise();
 };
 
 /**
@@ -42,7 +51,7 @@ api.sendSignedRequest = function (ajaxParams) {
       })
       .fail(function (jqXHR, textStatus, errorThrown) {
         console.error('Signed request failed', arguments);
-        deferred.reject(jqXHR, textStatus, errorThrown);
+        deferred.reject(jqXHR.responseJSON);
       });
   }.bind(this));
   return deferred.promise();
@@ -124,8 +133,8 @@ api.login = function (formData) {
     api.saveToken(response.auth_token).done(function () {
       deferred.resolve(response);
     });
-  }).fail(function (jqXHR, textStatus, errorThrown) {
-    deferred.reject(jqXHR, textStatus, errorThrown);
+  }).fail(function (errors) {
+    deferred.reject(errors);
   });
 
   return deferred.promise();
