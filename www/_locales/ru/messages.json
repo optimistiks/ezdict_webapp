@@ -2,5 +2,7 @@
   "Text": "Текст",
   "Translation count": "Количество просмотров",
   "Last translation date": "Когда смотрели",
-  "Username": "Имя пользователя"
+  "Username": "Имя пользователя",
+  "Password": "Пароль",
+  "Sign in": "Войти"
 }
