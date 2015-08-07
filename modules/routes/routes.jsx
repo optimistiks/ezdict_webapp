@@ -12,6 +12,7 @@ var LearnedWordsPage = require('../../pages/LearnedWordsPage/LearnedWordsPage.js
 var MyArticlesPage = require('../../pages/MyArticlesPage/MyArticlesPage.jsx');
 var UserProfilePage = require('../../pages/UserProfilePage/UserProfilePage.jsx');
 var LoginPage = require('../../pages/LoginPage/LoginPage.jsx');
+var RegistrationPage = require('../../pages/RegistrationPage/RegistrationPage.jsx');
 var App = require('../../components/App/App.jsx');
 
 var routes = (
@@ -22,6 +23,7 @@ var routes = (
     <Route name="my-articles" handler={MyArticlesPage} />
     <Route name="profile" handler={UserProfilePage} />
     <Route name="login" handler={LoginPage} />
+    <Route name="register" handler={RegistrationPage} />
     <Redirect from="/" to="history" />
   </Route>
 );

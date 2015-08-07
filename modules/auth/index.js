@@ -25,4 +25,8 @@ auth.login = function (formData) {
   return api.login(formData)
 };
 
+auth.register = function (formData) {
+  return api.register(formData)
+};
+
 module.exports = auth;

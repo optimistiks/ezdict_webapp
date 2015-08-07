@@ -115,8 +115,8 @@ api.register = function (formData) {
         deferred.resolve(response);
       });
     }
-  }).fail(function (jqXHR, textStatus, errorThrown) {
-    deferred.reject(jqXHR, textStatus, errorThrown);
+  }).fail(function (errors) {
+    deferred.reject(errors);
   });
 
   return deferred.promise();
