@@ -1,5 +1,7 @@
 var React = require('react');
-var Navigation = require('react-router').Navigation;
+var Router = require('react-router');
+var Navigation = Router.Navigation;
+var Link = Router.Link;
 var auth = require('../../modules/auth');
 var t = require('../../modules/t');
 var $ = require('jquery');
@@ -59,6 +61,7 @@ module.exports = React.createClass({
                  name="password"/>
         </div>
         <button type="submit" className="btn btn-success">{t('Register')}</button>
+        <Link className="pull-right" to="login">{t('Sign in')}</Link>
       </form>
     );
   }
