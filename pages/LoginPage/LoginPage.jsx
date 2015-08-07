@@ -18,7 +18,7 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className="row">
-        <div className="col-xs-offset-3 col-xs-6">
+        <div className="col-xs-offset-4 col-xs-4">
           <LoginForm />
         </div>
       </div>

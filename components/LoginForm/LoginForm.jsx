@@ -37,33 +37,23 @@ module.exports = React.createClass({
     });
 
     return (
-      <form className="form-horizontal" onSubmit={this.handleSubmit}>
+      <form onSubmit={this.handleSubmit}>
         <div className="row">
           <div className="col-xs-12 text-center">
             {errorNodes}
           </div>
         </div>
         <div className="form-group">
-          <label htmlFor="username" className="col-xs-4 control-label">{t('Username')}</label>
-
-          <div className="col-xs-8">
-            <input required type="text" className="form-control" id="username" placeholder={t('Username')}
-                   name="username"/>
-          </div>
+          <label htmlFor="username">{t('Username')}</label>
+          <input required type="text" className="form-control" id="username" placeholder={t('Username')}
+                 name="username"/>
         </div>
         <div className="form-group">
-          <label htmlFor="password" className="col-xs-4 control-label">{t('Password')}</label>
-
-          <div className="col-xs-8">
-            <input required type="password" className="form-control" id="password" placeholder={t('Password')}
-                   name="password"/>
-          </div>
+          <label htmlFor="password">{t('Password')}</label>
+          <input required type="password" className="form-control" id="password" placeholder={t('Password')}
+                 name="password"/>
         </div>
-        <div className="form-group">
-          <div className="col-xs-offset-4 col-xs-8">
-            <button type="submit" className="btn btn-success">{t('Sign in')}</button>
-          </div>
-        </div>
+        <button type="submit" className="btn btn-success">{t('Sign in')}</button>
       </form>
     );
   }
