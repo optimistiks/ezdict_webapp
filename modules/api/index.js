@@ -178,4 +178,12 @@ api.getUserInfo = function () {
   });
 };
 
+api.getTranslationHistory = function (page) {
+  return this.sendSignedRequest({
+    url: this.buildUrl('/translation_history'),
+    data: {page: page},
+    type: 'GET'
+  });
+};
+
 module.exports = api;

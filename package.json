@@ -16,8 +16,9 @@
     "bootstrap": "^3.3.5",
     "i18next-client": "^1.10.2",
     "jquery": "^2.1.4",
-    "react-router": "~0.13.3",
-    "react": "~0.13.3"
+    "moment": "^2.10.6",
+    "react": "~0.13.3",
+    "react-router": "~0.13.3"
   },
   "devDependencies": {
     "browserify": "~11.0.1",
