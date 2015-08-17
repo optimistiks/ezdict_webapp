@@ -15,7 +15,7 @@ module.exports = React.createClass({
     var formData = $(this.getDOMNode()).serializeArray();
     auth.login(formData)
       .done(function () {
-        this.transitionTo('/');
+        this.transitionTo('app');
       }.bind(this)).fail(function (errors) {
         this.setState({errors: errors});
       }.bind(this));

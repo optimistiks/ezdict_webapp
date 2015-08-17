@@ -4,7 +4,7 @@ module.exports = {
     willTransitionTo: function (transition, params, query, props) {
       auth.isLoggedIn()
         .done(function () {
-          transition.redirect('/');
+          transition.redirect('app', params);
           props();
         })
         .fail(function () {

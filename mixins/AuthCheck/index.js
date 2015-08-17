@@ -7,7 +7,7 @@ module.exports = {
           props();
         })
         .fail(function () {
-          transition.redirect('login');
+          transition.redirect('login', params);
           props();
         });
     }
