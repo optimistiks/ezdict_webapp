@@ -3,6 +3,7 @@ var Router = require('react-router'); // or var Router = ReactRouter; in browser
 var Link = require('../Link/Link.jsx');
 var NavLi = require('./NavLi/NavLi.jsx');
 var NavControls = require('./NavControls/NavControls.jsx');
+var LanguageSwitcher = require('./LanguageSwitcher/LanguageSwitcher.jsx');
 var auth = require('../../modules/auth/index.js');
 
 module.exports = React.createClass({
@@ -25,7 +26,10 @@ module.exports = React.createClass({
           <Link className="navbar-brand" to="history">Название</Link>
         </div>
 
-        {controls}
+        <div className="collapse navbar-collapse" id="navbar-collapse">
+          {controls}
+          <LanguageSwitcher />
+        </div>
       </nav>
     );
   }

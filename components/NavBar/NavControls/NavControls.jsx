@@ -21,7 +21,7 @@ module.exports = React.createClass({
 
   render: function () {
     return (
-      <div className="collapse navbar-collapse" id="navbar-collapse">
+      <div>
         <ul className="nav navbar-nav">
           <NavLi to="history">{t('Translation history')}</NavLi>
           <NavLi to="learning">{t('Words to learn')}</NavLi>
