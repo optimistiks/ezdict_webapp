@@ -1,21 +1,22 @@
 var React = require('react');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
-var Link = Router.Link;
+var State = Router.State;
+var Link = require('../Link/Link.jsx');
 var auth = require('../../modules/auth');
 var t = require('../../modules/t');
 var $ = require('jquery');
 
 module.exports = React.createClass({
 
-  mixins: [Navigation],
+  mixins: [Navigation, State],
 
   handleSubmit: function (e) {
     e.preventDefault();
     var formData = $(this.getDOMNode()).serializeArray();
     auth.login(formData)
       .done(function () {
-        this.transitionTo('app');
+        this.transitionTo('app', this.getParams());
       }.bind(this)).fail(function (errors) {
         this.setState({errors: errors});
       }.bind(this));

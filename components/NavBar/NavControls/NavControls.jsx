@@ -1,20 +1,21 @@
 var React = require('react');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
-var Link = Router.Link;
+var State = Router.State;
+var Link = require('../../Link/Link.jsx');
 var NavLi = require('../NavLi/NavLi.jsx');
 var t = require('../../../modules/t');
 var auth = require('../../../modules/auth');
 
 module.exports = React.createClass({
 
-  mixins: [Navigation],
+  mixins: [Navigation, State],
 
   signOut: function (e) {
     e.preventDefault();
     auth.logout()
       .done(function () {
-        this.transitionTo('login');
+        this.transitionTo('login', this.getParams());
       }.bind(this));
   },
 

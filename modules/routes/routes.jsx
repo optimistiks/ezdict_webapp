@@ -37,6 +37,7 @@ var routes = (
       <Route name="profile" handler={UserProfilePage}/>
       <Route name="login" handler={LoginPage}/>
       <Route name="register" handler={RegistrationPage}/>
+      <Redirect from="/:lng" to="history" />
     </Route>
   </Route>
 );

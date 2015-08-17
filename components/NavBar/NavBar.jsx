@@ -1,6 +1,6 @@
 var React = require('react');
 var Router = require('react-router'); // or var Router = ReactRouter; in browsers
-var Link = Router.Link;
+var Link = require('../Link/Link.jsx');
 var NavLi = require('./NavLi/NavLi.jsx');
 var NavControls = require('./NavControls/NavControls.jsx');
 var auth = require('../../modules/auth/index.js');
