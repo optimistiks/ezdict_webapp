@@ -1,5 +1,8 @@
 var api = require('../api');
 var $ = require('jquery');
+var browserExtension = require('../browser-extension');
+
+
 var auth = {
   userInfo: null
 };

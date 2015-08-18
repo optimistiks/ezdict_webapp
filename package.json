@@ -18,7 +18,8 @@
     "jquery": "^2.1.4",
     "moment": "^2.10.6",
     "react": "~0.13.3",
-    "react-router": "~0.13.3"
+    "react-router": "~0.13.3",
+    "bluebird": "~2.9.34"
   },
   "devDependencies": {
     "browserify": "~11.0.1",
