@@ -1,14 +1,11 @@
 var common = require('./common.json');
-var local = null;
 
 try {
-  local = require('./local.json');
-} catch (e) {
-}
-
-if (local) {
+  var local = require('./local.json');
   Object.keys(local).forEach(function (key) {
     common[key] = local[key];
   })
+} catch (e) {
 }
+
 module.exports = common;
