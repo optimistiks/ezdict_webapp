@@ -2,3 +2,4 @@ node_modules
 .idea
 www/dist/*
 !www/dist/.gitkeep
+config/local.json
