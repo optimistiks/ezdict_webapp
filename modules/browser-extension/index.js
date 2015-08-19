@@ -7,15 +7,19 @@ var chromeExtension = {
 
 chromeExtension.getToken = function () {
   var deferred = Promise.pending();
-  chrome.runtime.sendMessage(this.extensionId, {getToken: true}, function (response) {
-    console.log('response from extension', response);
+  chrome.runtime.sendMessage(this.extensionId, {getToken: true}, function (token) {
+    if (token) {
+      deferred.resolve(token);
+    } else {
+      deferred.reject();
+    }
   });
   return deferred.promise;
 };
 
 var app = null;
 
-if (chrome) {
+if (window.chrome) {
   app = chromeExtension;
 }
 

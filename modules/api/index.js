@@ -1,8 +1,12 @@
+//todo: заменить на ezdict-api-client
+//todo: см. todo к storage в extension
+
 var $ = require('jquery');
+var config = require('../../config');
 
 var api = {
-  URL: 'http://api.ezdict.potapovmax.com',
-  locale: 'en'
+  URL: config.apiProtocol + '://' + config.apiHost,
+  locale: config.apiLocale
 };
 
 api.setLocale = function (locale) {
