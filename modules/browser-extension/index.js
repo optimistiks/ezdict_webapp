@@ -17,6 +17,18 @@ chromeExtension.getToken = function () {
   return deferred.promise;
 };
 
+chromeExtension.saveToken = function (token) {
+  var deferred = Promise.pending();
+  chrome.runtime.sendMessage(this.extensionId, {saveToken: token}, function (token) {
+    if (token) {
+      deferred.resolve(token);
+    } else {
+      deferred.reject();
+    }
+  });
+  return deferred.promise;
+};
+
 var app = null;
 
 if (window.chrome) {

@@ -50,11 +50,21 @@ auth.logout = function () {
 };
 
 auth.login = function (formData) {
-  return api.login(formData)
+  return api.login(formData).then(function (response) {
+    if (browserExtension) {
+      browserExtension.saveToken(response.auth_token);
+    }
+    return response;
+  });
 };
 
 auth.register = function (formData) {
-  return api.register(formData)
+  return api.register(formData).then(function (response) {
+    if (browserExtension) {
+      browserExtension.saveToken(response.auth_token);
+    }
+    return response;
+  });
 };
 
 auth.getUserInfo = function () {
