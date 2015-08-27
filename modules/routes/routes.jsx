@@ -10,6 +10,7 @@ var TranslationHistoryPage = require('../../pages/TranslationHistoryPage/Transla
 var LearningWordsPage = require('../../pages/LearningWordsPage/LearningWordsPage.jsx');
 var LearnedWordsPage = require('../../pages/LearnedWordsPage/LearnedWordsPage.jsx');
 var CardPage = require('../../pages/CardPage/CardPage.jsx');
+var CardViewPage = require('../../pages/CardViewPage/CardViewPage.jsx');
 var UserProfilePage = require('../../pages/UserProfilePage/UserProfilePage.jsx');
 var LoginPage = require('../../pages/LoginPage/LoginPage.jsx');
 var RegistrationPage = require('../../pages/RegistrationPage/RegistrationPage.jsx');
@@ -34,6 +35,7 @@ var routes = (
       <Route name="learning" handler={LearningWordsPage}/>
       <Route name="learned" handler={LearnedWordsPage}/>
       <Route name="card" handler={CardPage}/>
+      <Route name="card-view" path="card/:id" handler={CardViewPage}/>
       <Route name="profile" handler={UserProfilePage}/>
       <Route name="login" handler={LoginPage}/>
       <Route name="register" handler={RegistrationPage}/>
