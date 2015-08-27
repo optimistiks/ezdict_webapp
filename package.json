@@ -8,7 +8,7 @@
     "browserify": "browserify index.js --ignore-missing --debug -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]",
     "uglify": "uglifyjs www/dist/bundle.js --compress --mangle --output www/dist/bundle.js",
     "build": "npm run browserify && npm run uglify",
-    "watch": "watchify index.js --debug --verbose -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]"
+    "watch": "watchify index.js --ignore-missing --debug --verbose -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]"
   },
   "author": "",
   "license": "ISC",

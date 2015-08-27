@@ -23,10 +23,10 @@ module.exports = React.createClass({
     return (
       <div>
         <ul className="nav navbar-nav">
-          <NavLi to="history">{t('Translation history')}</NavLi>
           <NavLi to="learning">{t('Words to learn')}</NavLi>
           <NavLi to="learned">{t('Learned words')}</NavLi>
-          <NavLi to="my-articles">{t('My translations')}</NavLi>
+          <NavLi to="card">{t('Cards')}</NavLi>
+          <NavLi to="history">{t('Translation history')}</NavLi>
         </ul>
         <ul className="nav navbar-nav navbar-right">
           <li className="dropdown">
