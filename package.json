@@ -19,7 +19,8 @@
     "moment": "^2.10.6",
     "react": "~0.13.3",
     "react-router": "~0.13.3",
-    "bluebird": "~2.9.34"
+    "bluebird": "~2.9.34",
+    "ezdict-api-client": "git://github.com/optimistiks/ezdict_api_client#master"
   },
   "devDependencies": {
     "browserify": "~11.0.1",
