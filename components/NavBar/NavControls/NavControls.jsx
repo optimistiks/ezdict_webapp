@@ -14,9 +14,9 @@ module.exports = React.createClass({
   signOut: function (e) {
     e.preventDefault();
     auth.logout()
-      .done(function () {
+      .then(function () {
         this.transitionTo('login', this.getParams());
-      }.bind(this));
+      }.bind(this)).catch(function() {});
   },
 
   render: function () {

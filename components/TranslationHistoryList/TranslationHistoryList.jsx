@@ -9,7 +9,7 @@ module.exports = React.createClass({
 
   loadHistories: function () {
     api.getTranslationHistory(this.next)
-      .done(function (response) {
+      .then(function (response) {
         if (!this.isMounted()) {
           return false;
         }
@@ -23,7 +23,7 @@ module.exports = React.createClass({
         this.setState({
           histories: this.state.histories.concat(response.results)
         });
-      }.bind(this));
+      }.bind(this)).catch(function() {});
   },
 
   getInitialState: function () {

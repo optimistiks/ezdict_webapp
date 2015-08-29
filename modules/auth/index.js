@@ -1,6 +1,7 @@
 //todo: избавиться от deferred
 
 var api = require('../api');
+var tokenStorage = require('../token-storage');
 var $ = require('jquery');
 var browserExtension = require('../browser-extension');
 var Promise = require('bluebird');
@@ -12,8 +13,7 @@ var auth = {
 auth.saveTokenFromExtension = function () {
   if (browserExtension) {
     return browserExtension.getToken().then(function (token) {
-      //todo: заменить на auth.saveToken (см. todo к storage)
-      return api.saveToken(token);
+      return tokenStorage.saveToken(token);
     }).catch(function () {
     });
   } else {
@@ -31,11 +31,11 @@ auth.isLoggedIn = function () {
     this.saveTokenFromExtension()
       .finally(function () {
         api.getUserInfo()
-          .done(function (userInfo) {
+          .then(function (userInfo) {
             this.userInfo = userInfo;
             def.resolve();
           }.bind(this))
-          .fail(function () {
+          .catch(function () {
             def.reject();
           })
       }.bind(this));
@@ -44,7 +44,7 @@ auth.isLoggedIn = function () {
 };
 
 auth.logout = function () {
-  return api.logout().done(function () {
+  return api.logout().then(function () {
     this.userInfo = null;
   }.bind(this))
 };

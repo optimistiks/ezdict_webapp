@@ -6,19 +6,20 @@ var Link = require('../Link/Link.jsx');
 var auth = require('../../modules/auth');
 var t = require('../../modules/t');
 var $ = require('jquery');
+var Form = require('../../mixins/Form');
 
 module.exports = React.createClass({
 
-  mixins: [Navigation, State],
+  mixins: [Navigation, State, Form],
 
   handleSubmit: function (e) {
     e.preventDefault();
-    var formData = $(this.getDOMNode()).serializeArray();
+    var formData = this.serializeAsKeyValue();
     auth.login(formData)
-      .done(function () {
+      .then(function () {
         this.transitionTo('app', this.getParams());
-      }.bind(this)).fail(function (errors) {
-        this.setState({errors: errors});
+      }.bind(this)).catch(function (exception) {
+          this.setState({errors: exception.error});
       }.bind(this));
   },
 
