@@ -1,6 +1,9 @@
 var React = require('react');
 var AuthCheck = require('../../mixins/AuthCheck');
 var CardList = require('../../components/CardList/CardList.jsx');
+var Link = require('../../components/Link/Link.jsx');
+var t = require('../../modules/t');
+
 module.exports = React.createClass({
   mixins: [AuthCheck],
   render: function () {
