@@ -39,7 +39,7 @@ module.exports = React.createClass({
 
         var cardNodes = this.state.cards.map(function (card) {
             return (
-                <Link to="card-view" params={{id: card.id}} className="list-group-item">
+                <Link to="card-form" params={{id: card.id}} className="list-group-item">
                     <h4 className="list-group-item-heading">{card.text}</h4>
                     <p className="list-group-item-text">{card.article}</p>
                 </Link>
