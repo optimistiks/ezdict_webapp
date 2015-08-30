@@ -13,5 +13,8 @@
   "Cards": "Карточки",
   "Profile": "Профиль",
   "More": "Еще",
-  "linkToCardCreate": "Создать карточку"
+  "linkToCardCreate": "Создать карточку",
+  "cardTextInputLabel": "Текст",
+  "cardArticleInputLabel": "Описание",
+  "saveButton": "Сохранить"
 }

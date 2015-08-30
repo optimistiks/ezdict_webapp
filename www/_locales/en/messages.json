@@ -1,3 +1,6 @@
 {
-  "linkToCardCreate": "Create card"
+  "linkToCardCreate": "Create card",
+  "cardTextInputLabel": "Text",
+  "cardArticleInputLabel": "Description",
+  "saveButton": "Save"
 }
