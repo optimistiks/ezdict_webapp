@@ -1,7 +1,7 @@
 {
   "apiProtocol": "http",
   "apiHost": "api.ezdict.potapovmax.com",
-  "apiLocale": "ru",
   "chromeExtensionId": "aclhfmpoahihmhhacaekgcbjaeojnifa",
-  "defaultLng": "ru"
+  "defaultLng": "ru",
+  "supportedLngs": ["en", "ru"]
 }

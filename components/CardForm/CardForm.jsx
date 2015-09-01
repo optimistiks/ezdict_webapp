@@ -75,7 +75,7 @@ module.exports = React.createClass({
                 <input required type="hidden" name="id" value={this.state.card.id}/>
                 <div className="form-group">
                     <input required type="text" className="form-control" id="text" placeholder={t('cardTextInputLabel')}
-                           name="text" value={this.state.card.text}/>
+                           name="text" value={this.state.card.text || this.getTextParam()} onChange={this.handleChange}/>
                 </div>
                 <div className="form-group">
                     <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}
