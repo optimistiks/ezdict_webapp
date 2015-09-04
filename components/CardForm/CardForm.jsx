@@ -14,24 +14,8 @@ module.exports = React.createClass({
         return {card: {}, errors: {}};
     },
 
-    componentDidMount: function () {
-        this.loadCard().then(function (card) {
-            this.setState({
-                card: card
-            });
-        }.bind(this)).catch(function () {
-        });
-    },
-
-    loadCard: function () {
-        var id = this.props.params.id;
-        return this.getTextParam() ? api.card.get({text: id}).then(function (response) {
-            return response.results[0] || {};
-        }) : api.card.get(id);
-    },
-
-    getTextParam: function () {
-        return parseInt(this.props.params.id, 10) ? '' : this.props.params.id;
+    componentWillReceiveProps: function(nextProps) {
+        this.setState({card: nextProps.card});
     },
 
     handleSubmit: function (e) {
@@ -49,7 +33,7 @@ module.exports = React.createClass({
         // todo: copy
         var card = this.state.card;
         card[event.target.name] = event.target.value;
-        this.setState({card: card});
+        this.props.handleChange(card);
     },
 
     render: function () {
@@ -75,7 +59,7 @@ module.exports = React.createClass({
                 <input required type="hidden" name="id" value={this.state.card.id}/>
                 <div className="form-group">
                     <input required type="text" className="form-control" id="text" placeholder={t('cardTextInputLabel')}
-                           name="text" value={this.state.card.text || this.getTextParam()} onChange={this.handleChange}/>
+                           name="text" value={this.state.card.text || this.props.text} onChange={this.handleChange}/>
                 </div>
                 <div className="form-group">
                     <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}

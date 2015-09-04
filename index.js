@@ -11,7 +11,7 @@ var render = function(Handler) {
 };
 
 Router.run(routes, function (Handler, state) {
-  if (state.params.lng !== i18n.lng() && config.supportedLngs.indexof(state.params.lng) !== -1) {
+  if (state.params.lng !== i18n.lng() && config.supportedLngs.indexOf(state.params.lng) !== -1) {
     i18n.setLng(state.params.lng, function () {
       render(Handler);
     });
