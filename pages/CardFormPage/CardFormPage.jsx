@@ -1,12 +1,16 @@
 var React = require('react');
-var AuthCheck = require('../../mixins/AuthCheck');
-var CardForm = require('../../components/CardForm/CardForm.jsx');
-var api = require('../../modules/api');
-var Form = require('../../mixins/Form');
-var t = require('../../modules/t');
+
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var State = Router.State;
+
+var AuthCheck = require('../../mixins/AuthCheck');
+var CardForm = require('../../components/CardForm/CardForm.jsx');
+var Form = require('../../mixins/Form');
+var CardPossibleMeanings = require('../../components/CardPossibleMeanings/CardPossibleMeanings.jsx');
+
+var t = require('../../modules/t');
+var api = require('../../modules/api');
 
 
 module.exports = React.createClass({
@@ -46,6 +50,9 @@ module.exports = React.createClass({
             <div className="row">
                 <div className="col-xs-6">
                     <CardForm card={this.state.card} text={this.getTextParam()} handleChange={this.handleChange}/>
+                </div>
+                <div className="col-xs-6">
+                    <CardPossibleMeanings text={this.state.card.text || this.getTextParam()}/>
                 </div>
             </div>
         );

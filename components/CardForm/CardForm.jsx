@@ -1,6 +1,5 @@
 var React = require('react');
 var api = require('../../modules/api');
-var Form = require('../../mixins/Form');
 var t = require('../../modules/t');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
@@ -8,20 +7,19 @@ var State = Router.State;
 
 module.exports = React.createClass({
 
-    mixins: [Navigation, State, Form],
+    mixins: [Navigation, State],
 
     getInitialState: function () {
         return {card: {}, errors: {}};
     },
 
-    componentWillReceiveProps: function(nextProps) {
+    componentWillReceiveProps: function (nextProps) {
         this.setState({card: nextProps.card});
     },
 
     handleSubmit: function (e) {
         e.preventDefault();
-        var formData = this.serializeAsKeyValue();
-        (this.state.card.id ? api.card.put(this.state.card.id, formData) : api.card.post(formData))
+        (this.state.card.id ? api.card.put(this.state.card.id, this.state.card) : api.card.post(this.state.card))
             .then(function () {
                 this.transitionTo('card', this.getParams());
             }.bind(this)).catch(function (exception) {
@@ -51,21 +49,26 @@ module.exports = React.createClass({
 
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="row">
-                    <div className="col-xs-12 text-center">
-                        {errorNodes}
+                <div className="panel panel-info">
+                    <div className="panel-heading">
+                        <h3 className="panel-title">Карточка <strong>{this.state.card.text || this.props.text}</strong>
+                        </h3>
+                    </div>
+                    <div className="panel-body">
+                        <div className="row">
+                            <div className="col-xs-12 text-center">
+                                {errorNodes}
+                            </div>
+                        </div>
+                        <input required type="hidden" name="id" value={this.state.card.id}/>
+                        <div className="form-group">
+                            <label htmlFor="text">Описание</label>
+                            <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}
+                                      name="article" value={this.state.card.article} onChange={this.handleChange}/>
+                        </div>
+                        <button type="submit" className="btn btn-success">{t('saveButton')}</button>
                     </div>
                 </div>
-                <input required type="hidden" name="id" value={this.state.card.id}/>
-                <div className="form-group">
-                    <input required type="text" className="form-control" id="text" placeholder={t('cardTextInputLabel')}
-                           name="text" value={this.state.card.text || this.props.text} onChange={this.handleChange}/>
-                </div>
-                <div className="form-group">
-                    <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}
-                              name="article" value={this.state.card.article} onChange={this.handleChange}/>
-                </div>
-                <button type="submit" className="btn btn-success">{t('saveButton')}</button>
             </form>
         );
     }
