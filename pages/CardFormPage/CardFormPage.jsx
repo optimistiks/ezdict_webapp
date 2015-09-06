@@ -26,7 +26,8 @@ module.exports = React.createClass({
             this.setState({
                 card: card
             });
-        }.bind(this)).catch(function () {
+        }.bind(this)).catch(function (exception) {
+            console.error(exception);
         });
     },
 

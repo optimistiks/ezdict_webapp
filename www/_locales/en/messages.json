@@ -2,5 +2,7 @@
   "linkToCardCreate": "Create card",
   "cardTextInputLabel": "Text",
   "cardArticleInputLabel": "Description",
-  "saveButton": "Save"
+  "saveButton": "Save",
+  "cardPossibleMeaningsPanelTitle": "Possible meanings of",
+  "cardFormPanelTitle": "Card for"
 }

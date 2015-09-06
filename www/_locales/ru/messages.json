@@ -16,5 +16,7 @@
   "linkToCardCreate": "Создать карточку",
   "cardTextInputLabel": "Текст",
   "cardArticleInputLabel": "Описание",
-  "saveButton": "Сохранить"
+  "saveButton": "Сохранить",
+  "cardPossibleMeaningsPanelTitle": "Возможные значения",
+  "cardFormPanelTitle": "Карточка"
 }

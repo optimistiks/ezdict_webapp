@@ -23,7 +23,8 @@ module.exports = React.createClass({
                 this.setState({
                     cards: this.state.cards.concat(response.results)
                 });
-            }.bind(this)).catch(function () {
+            }.bind(this)).catch(function (exception) {
+                console.error(exception);
             });
     },
 

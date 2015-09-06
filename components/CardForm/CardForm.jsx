@@ -51,7 +51,7 @@ module.exports = React.createClass({
             <form onSubmit={this.handleSubmit}>
                 <div className="panel panel-info">
                     <div className="panel-heading">
-                        <h3 className="panel-title">Карточка <strong>{this.state.card.text || this.props.text}</strong>
+                        <h3 className="panel-title">{t('cardFormPanelTitle')} <strong>{this.state.card.text || this.props.text}</strong>
                         </h3>
                     </div>
                     <div className="panel-body">
