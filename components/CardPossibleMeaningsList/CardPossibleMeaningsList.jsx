@@ -17,7 +17,7 @@ module.exports = React.createClass({
             return;
         }
 
-        this.loadTranslationAndUpdateState();
+        this.loadTranslationAndUpdateState(this.props.text);
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -25,11 +25,11 @@ module.exports = React.createClass({
             return;
         }
 
-        this.loadTranslationAndUpdateState();
+        this.loadTranslationAndUpdateState(nextProps.text);
     },
 
-    loadTranslationAndUpdateState: function () {
-        this.loadTranslation().then(function (translation) {
+    loadTranslationAndUpdateState: function (text) {
+        this.loadTranslation(text).then(function (translation) {
             this.setState({
                 translation: translation
             });
@@ -38,9 +38,9 @@ module.exports = React.createClass({
         });
     },
 
-    loadTranslation: function () {
+    loadTranslation: function (text) {
         return api.getProfile().then(function (profile) {
-            return api.translate(this.props.text, profile.target_lang);
+            return api.translate(text, profile.target_lang);
         }.bind(this)).catch(function (exception) {
             console.error(exception);
         });
@@ -58,9 +58,11 @@ module.exports = React.createClass({
             tran.ya_dict.def.forEach(function (def) {
                 def.tr.forEach(function (defTr) {
                     meanings.push(defTr.text);
-                    defTr.syn.forEach(function (defTrSyn) {
-                        meanings.push(defTrSyn.text);
-                    });
+                    if (defTr.syn) {
+                        defTr.syn.forEach(function (defTrSyn) {
+                            meanings.push(defTrSyn.text);
+                        });
+                    }
                 });
             });
         }
@@ -81,7 +83,8 @@ module.exports = React.createClass({
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
-                    <h3 className="panel-title">{t('cardPossibleMeaningsPanelTitle')} <strong>{this.props.text}</strong></h3>
+                    <h3 className="panel-title">{t('cardPossibleMeaningsPanelTitle')} <strong>{this.props.text}</strong>
+                    </h3>
                 </div>
 
                 <ul className="list-group">

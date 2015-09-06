@@ -4,6 +4,8 @@ var t = require('../../modules/t');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var State = Router.State;
+var CardFormMeaningsList = require('../CardFormMeaningsList/CardFormMeaningsList.jsx');
+
 
 module.exports = React.createClass({
 
@@ -66,6 +68,7 @@ module.exports = React.createClass({
                             <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}
                                       name="article" value={this.state.card.article} onChange={this.handleChange}/>
                         </div>
+                        <CardFormMeaningsList card={this.state.card}/>
                         <button type="submit" className="btn btn-success">{t('saveButton')}</button>
                     </div>
                 </div>

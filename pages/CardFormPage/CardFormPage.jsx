@@ -7,7 +7,7 @@ var State = Router.State;
 var AuthCheck = require('../../mixins/AuthCheck');
 var CardForm = require('../../components/CardForm/CardForm.jsx');
 var Form = require('../../mixins/Form');
-var CardPossibleMeanings = require('../../components/CardPossibleMeanings/CardPossibleMeanings.jsx');
+var CardPossibleMeaningsList = require('../../components/CardPossibleMeaningsList/CardPossibleMeaningsList.jsx');
 
 var t = require('../../modules/t');
 var api = require('../../modules/api');
@@ -22,7 +22,17 @@ module.exports = React.createClass({
     },
 
     componentDidMount: function () {
-        this.loadCard().then(function (card) {
+        this.loadCardAndUpdateState(this.props);
+    },
+
+    componentWillReceiveProps: function (nextProps) {
+        if (nextProps.params.id !== this.props.params.id) {
+            this.loadCardAndUpdateState(nextProps);
+        }
+    },
+
+    loadCardAndUpdateState: function (props) {
+        return this.loadCard(props).then(function (card) {
             this.setState({
                 card: card
             });
@@ -31,15 +41,23 @@ module.exports = React.createClass({
         });
     },
 
-    loadCard: function () {
-        var id = this.props.params.id;
-        return this.getTextParam() ? api.card.get({text: id}).then(function (response) {
-            return response.results[0] || {};
-        }) : api.card.get(id);
+    loadCard: function (props) {
+        var text = this.getTextParam(props);
+        return text ? this.loadCardByText(text) : this.loadCardById(props.id)
     },
 
-    getTextParam: function () {
-        return parseInt(this.props.params.id, 10) ? '' : this.props.params.id;
+    loadCardById: function (id) {
+        return api.card.get(id)
+    },
+
+    loadCardByText: function (text) {
+        return api.card.get({text: text}).then(function (response) {
+            return response.results[0] || {};
+        });
+    },
+
+    getTextParam: function (props) {
+        return parseInt(props.params.id, 10) ? '' : props.params.id;
     },
 
     handleChange: function (card) {
@@ -50,10 +68,10 @@ module.exports = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-6">
-                    <CardForm card={this.state.card} text={this.getTextParam()} handleChange={this.handleChange}/>
+                    <CardForm card={this.state.card} text={this.getTextParam(this.props)} handleChange={this.handleChange}/>
                 </div>
                 <div className="col-xs-6">
-                    <CardPossibleMeanings text={this.state.card.text || this.getTextParam()}/>
+                    <CardPossibleMeaningsList text={this.state.card.text || this.getTextParam(this.props)}/>
                 </div>
             </div>
         );
