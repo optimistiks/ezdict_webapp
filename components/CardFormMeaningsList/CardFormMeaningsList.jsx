@@ -1,10 +1,18 @@
 var React = require('react');
 var api = require('../../modules/api');
+var eventEmitter = require('../../modules/event-emitter');
 
 
 module.exports = React.createClass({
     getInitialState: function () {
         return {meanings: []};
+    },
+
+    componentWillMount: function () {
+        var ringBell = function () {
+            console.log('ring ring ring');
+        };
+        eventEmitter.on('doorOpen', ringBell);
     },
 
     componentDidMount: function () {

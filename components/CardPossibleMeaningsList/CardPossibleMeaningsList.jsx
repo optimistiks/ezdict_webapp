@@ -2,6 +2,7 @@ var React = require('react');
 var auth = require('../../modules/auth');
 var api = require('../../modules/api');
 var t = require('../../modules/t');
+var eventEmitter = require('../../modules/event-emitter');
 
 
 module.exports = React.createClass({
@@ -73,6 +74,7 @@ module.exports = React.createClass({
         event.preventDefault();
         var meaning = this.state.meanings[index];
         console.log(meaning);
+        eventEmitter.emit('doorOpen');
     },
 
 
