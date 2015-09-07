@@ -9,7 +9,7 @@ module.exports = React.createClass({
     mixins: [],
 
     getInitialState: function () {
-        return {translation: {}};
+        return {meanings: []};
     },
 
     componentDidMount: function () {
@@ -31,7 +31,7 @@ module.exports = React.createClass({
     loadTranslationAndUpdateState: function (text) {
         this.loadTranslation(text).then(function (translation) {
             this.setState({
-                translation: translation
+                meanings: this.extractMeanings(translation)
             });
         }.bind(this)).catch(function (exception) {
             console.error(exception);
@@ -46,16 +46,15 @@ module.exports = React.createClass({
         });
     },
 
-    extractMeanings: function () {
+    extractMeanings: function (translation) {
         var meanings = [];
-        var tran = this.state.translation;
 
-        if (tran.translation) {
-            meanings.push(tran.translation);
+        if (translation.translation) {
+            meanings.push(translation.translation);
         }
 
-        if (tran.ya_dict && tran.ya_dict.def.length) {
-            tran.ya_dict.def.forEach(function (def) {
+        if (translation.ya_dict && translation.ya_dict.def.length) {
+            translation.ya_dict.def.forEach(function (def) {
                 def.tr.forEach(function (defTr) {
                     meanings.push(defTr.text);
                     if (defTr.syn) {
@@ -70,15 +69,20 @@ module.exports = React.createClass({
         return meanings;
     },
 
+    handleClick: function (index, event) {
+        event.preventDefault();
+        var meaning = this.state.meanings[index];
+        console.log(meaning);
+    },
+
 
     render: function () {
-        var meanings = this.extractMeanings();
-
-        var meaningNodes = meanings.map(function (text) {
+        var meaningNodes = this.state.meanings.map(function (text, index) {
+            var boundClick = this.handleClick.bind(this, index);
             return (
-                <a href="#" className="list-group-item">{text}</a>
+                <a onClick={boundClick} data-meaning={text} href="#" className="list-group-item">{text}</a>
             );
-        });
+        }.bind(this));
 
         return (
             <div className="panel panel-default">
