@@ -43,7 +43,7 @@ module.exports = React.createClass({
 
     loadCard: function (props) {
         var text = this.getTextParam(props);
-        return text ? this.loadCardByText(text) : this.loadCardById(props.id)
+        return text ? this.loadCardByText(text) : this.loadCardById(props.params.id)
     },
 
     loadCardById: function (id) {
