@@ -16,10 +16,6 @@ module.exports = React.createClass({
         };
     },
 
-    componentWillMount: function () {
-        cardEventEmitter.onMeaningAddToCard(this.handleMeaningAddToCard);
-    },
-
     componentDidMount: function () {
         if (!this.props.text) {
             return;
@@ -55,10 +51,6 @@ module.exports = React.createClass({
         });
     },
 
-    handleMeaningAddToCard: function (meaning) {
-        console.log('handleMeaningAddToCard', meaning);
-    },
-
     extractMeaningsFromTranslation: function (translation) {
         return ['test1', 'test2', 'test3'];
         translation = translation || {};
@@ -87,15 +79,17 @@ module.exports = React.createClass({
 
     handleClick: function (index, event) {
         event.preventDefault();
-        var meanings = this.getNotIntersectedMeanings();
-        var meaning = meanings[index];
-        cardEventEmitter.emitPossibleMeaningClick(meaning);
+        var displayedMeanings = this.getNotIntersectedMeanings();
+        var clickedMeaning = displayedMeanings[index];
+        var cardMeanings = this.props.meanings;
+        cardMeanings.push({text: clickedMeaning});
+        this.props.handleMeaningsChange(cardMeanings);
     },
 
     getNotIntersectedMeanings: function () {
         var translationMeanings = this.state.translationMeanings;
         console.log('translationMeanings', translationMeanings);
-        var cardMeanings = this.props.card.card_meanings.map(function (meaning) {
+        var cardMeanings = this.props.meanings.map(function (meaning) {
             return meaning.text;
         });
         console.log('cardMeanings', cardMeanings);

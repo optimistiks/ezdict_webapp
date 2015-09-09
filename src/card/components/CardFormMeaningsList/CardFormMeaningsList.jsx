@@ -6,44 +6,26 @@ var cardEventEmitter = require('../../modules/event-emitter');
 
 module.exports = React.createClass({
 
-    componentWillMount: function () {
-        cardEventEmitter.onPossibleMeaningClick(this.addMeaningFromPossibleMeanings);
-    },
-
-    addMeaningFromPossibleMeanings: function (meaningText) {
-        console.log('addMeaningFromPossibleMeanings', meaningText);
-        var card = this.props.card;
-        var meaningModel = this.wrapMeaningText(meaningText);
-        card.card_meanings.push(meaningModel);
-        this.props.handleChange(card);
-    },
-
-    wrapMeaningText: function (text) {
-        return {
-            text: text
-        };
-    },
-
-    handleDelete: function (index, event) {
+    handleClick: function (index, event) {
         event.preventDefault();
-        var card = this.props.card;
-        var deleted = card.card_meanings.splice(index, 1);
-        console.log('handleDelete', deleted);
-        if (deleted.length && deleted[0].id) {
-            this.props.handleMeaningDelete(deleted[0]);
+        var cardMeanings = this.props.meanings;
+        var clickedMeaning = cardMeanings[index];
+        cardMeanings.splice(index, 1);
+        this.props.handleMeaningsChange(cardMeanings);
+        if (clickedMeaning.id) {
+            this.props.handleMeaningDeletion(clickedMeaning);
         }
-        this.props.handleChange(card);
     },
 
     render: function () {
 
         var meaningsList = null;
 
-        if (this.props.card.card_meanings.length) {
-            let meaningNodes = this.props.card.card_meanings.map(function (meaning, index) {
-                var boundDelete = this.handleDelete.bind(this, index);
+        if (this.props.meanings.length) {
+            let meaningNodes = this.props.meanings.map(function (meaning, index) {
+                var boundClick = this.handleClick.bind(this, index);
                 return (
-                    <a href="#" className="list-group-item" onClick={boundDelete}>{meaning.text}</a>
+                    <a href="#" className="list-group-item" onClick={boundClick}>{meaning.text}</a>
                 );
             }.bind(this));
 

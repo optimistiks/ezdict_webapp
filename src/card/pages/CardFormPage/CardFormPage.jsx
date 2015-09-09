@@ -19,7 +19,7 @@ module.exports = React.createClass({
     mixins: [AuthCheck, Navigation, State, Form],
 
     getInitialState: function () {
-        return {card: {card_meanings: []}};
+        return {card: {}, meanings: []};
     },
 
     componentDidMount: function () {
@@ -34,8 +34,11 @@ module.exports = React.createClass({
 
     loadCardAndUpdateState: function (props) {
         return this.loadCard(props).then(function (card) {
+            var meanings = card.card_meanings;
+            delete card.card_meanings;
             this.setState({
-                card: card
+                card: card,
+                meanings: meanings
             });
         }.bind(this)).catch(function (exception) {
             console.error(exception);
@@ -61,20 +64,28 @@ module.exports = React.createClass({
         return parseInt(props.params.id, 10) ? '' : props.params.id;
     },
 
-    handleChange: function (card) {
-        console.log('handleChange', card);
+    handleCardChange: function (card) {
         this.setState({card: card});
+    },
+
+    handleMeaningsChange: function (meanings) {
+        this.setState({meanings: meanings});
     },
 
     render: function () {
         return (
             <div className="row">
                 <div className="col-xs-6">
-                    <CardForm card={this.state.card} text={this.getTextParam(this.props)}
-                              handleChange={this.handleChange}/>
+                    <CardForm card={this.state.card}
+                              meanings={this.state.meanings}
+                              text={this.state.card.text || this.getTextParam(this.props)}
+                              handleCardChange={this.handleCardChange}
+                              handleMeaningsChange={this.handleMeaningsChange} />
                 </div>
                 <div className="col-xs-6">
                     <CardPossibleMeaningsList card={this.state.card}
+                                              meanings={this.state.meanings}
+                                              handleMeaningsChange={this.handleMeaningsChange}
                                               text={this.state.card.text || this.getTextParam(this.props)}/>
                 </div>
             </div>
