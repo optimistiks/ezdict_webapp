@@ -14,6 +14,7 @@ module.exports = React.createClass({
     mixins: [Navigation, State],
 
     getInitialState: function () {
+        //todo: possibly duplicates state of cardformpage
         return {card: {}, errors: {}};
     },
 

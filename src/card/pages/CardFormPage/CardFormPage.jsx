@@ -19,7 +19,7 @@ module.exports = React.createClass({
     mixins: [AuthCheck, Navigation, State, Form],
 
     getInitialState: function () {
-        return {card: {}};
+        return {card: {card_meanings: []}};
     },
 
     componentDidMount: function () {
@@ -69,10 +69,12 @@ module.exports = React.createClass({
         return (
             <div className="row">
                 <div className="col-xs-6">
-                    <CardForm card={this.state.card} text={this.getTextParam(this.props)} handleChange={this.handleChange}/>
+                    <CardForm card={this.state.card} text={this.getTextParam(this.props)}
+                              handleChange={this.handleChange}/>
                 </div>
                 <div className="col-xs-6">
-                    <CardPossibleMeaningsList text={this.state.card.text || this.getTextParam(this.props)}/>
+                    <CardPossibleMeaningsList card={this.state.card}
+                                              text={this.state.card.text || this.getTextParam(this.props)}/>
                 </div>
             </div>
         );

@@ -1,7 +1,7 @@
 var React = require('react');
 
 var api = require('../../../common/modules/api');
-var eventEmitter = require('../../modules/event-emitter');
+var cardEventEmitter = require('../../modules/event-emitter');
 
 
 module.exports = React.createClass({
@@ -10,10 +10,7 @@ module.exports = React.createClass({
     },
 
     componentWillMount: function () {
-        var ringBell = function () {
-            console.log('ring ring ring');
-        };
-        eventEmitter.on('doorOpen', ringBell);
+        cardEventEmitter.onPossibleMeaningClick(this.addMeaningFromPossibleMeanings);
     },
 
     componentDidMount: function () {
@@ -49,6 +46,15 @@ module.exports = React.createClass({
                 meanings: response.results
             });
         }.bind(this));
+    },
+
+    addMeaningFromPossibleMeanings: function (meaning) {
+        if (this.state.meanings.indexOf(meaning) === -1) {
+            cardEventEmitter.emitMeaningAddToCard(meaning);
+            this.setState({
+                meanings: this.state.meanings.concat([meaning])
+            });
+        }
     },
 
     render: function () {
