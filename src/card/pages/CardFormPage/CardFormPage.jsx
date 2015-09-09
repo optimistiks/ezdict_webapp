@@ -62,6 +62,7 @@ module.exports = React.createClass({
     },
 
     handleChange: function (card) {
+        console.log('handleChange', card);
         this.setState({card: card});
     },
 

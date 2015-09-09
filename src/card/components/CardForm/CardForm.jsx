@@ -14,18 +14,17 @@ module.exports = React.createClass({
     mixins: [Navigation, State],
 
     getInitialState: function () {
-        //todo: possibly duplicates state of cardformpage
-        return {card: {}, errors: {}};
-    },
-
-    componentWillReceiveProps: function (nextProps) {
-        this.setState({card: nextProps.card});
+        return {errors: {}, deletedMeanings: []};
     },
 
     handleSubmit: function (e) {
         e.preventDefault();
-        (this.state.card.id ? api.card.put(this.state.card.id, this.state.card) : api.card.post(this.state.card))
+        console.log('handle submit', this.state.deletedMeanings);
+        return;
+        (this.props.card.id ? api.card.put(this.props.card.id, this.props.card) : api.card.post(this.props.card))
             .then(function () {
+                // todo: another submit of meanings
+                // todo: meaningsToDelete DELETE, newMeanings POST
                 this.transitionTo('card', this.getParams());
             }.bind(this)).catch(function (exception) {
                 this.setState({errors: exception.error});
@@ -34,9 +33,16 @@ module.exports = React.createClass({
 
     handleChange: function (event) {
         // todo: copy
-        var card = this.state.card;
+        var card = this.props.card;
         card[event.target.name] = event.target.value;
         this.props.handleChange(card);
+    },
+
+    handleMeaningDelete: function (meaningModel) {
+        console.log('handleMeaningDelete', meaningModel);
+        this.setState({
+            deletedMeanings: this.state.deletedMeanings.concat([meaningModel])
+        });
     },
 
     render: function () {
@@ -56,7 +62,8 @@ module.exports = React.createClass({
             <form onSubmit={this.handleSubmit}>
                 <div className="panel panel-info">
                     <div className="panel-heading">
-                        <h3 className="panel-title">{t('cardFormPanelTitle')} <strong>{this.state.card.text || this.props.text}</strong>
+                        <h3 className="panel-title">{t('cardFormPanelTitle')}
+                            <strong>{this.props.card.text || this.props.text}</strong>
                         </h3>
                     </div>
                     <div className="panel-body">
@@ -65,13 +72,14 @@ module.exports = React.createClass({
                                 {errorNodes}
                             </div>
                         </div>
-                        <input required type="hidden" name="id" value={this.state.card.id}/>
+                        <input required type="hidden" name="id" value={this.props.card.id}/>
                         <div className="form-group">
                             <label htmlFor="text">Описание</label>
                             <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}
-                                      name="article" value={this.state.card.article} onChange={this.handleChange}/>
+                                      name="article" value={this.props.card.article} onChange={this.handleChange}/>
                         </div>
-                        <CardFormMeaningsList card={this.state.card}/>
+                        <CardFormMeaningsList card={this.props.card} handleChange={this.props.handleChange}
+                                              handleMeaningDelete={this.handleMeaningDelete}/>
                         <button type="submit" className="btn btn-success">{t('saveButton')}</button>
                     </div>
                 </div>

@@ -5,68 +5,47 @@ var cardEventEmitter = require('../../modules/event-emitter');
 
 
 module.exports = React.createClass({
-    getInitialState: function () {
-        return {meanings: []};
-    },
 
     componentWillMount: function () {
         cardEventEmitter.onPossibleMeaningClick(this.addMeaningFromPossibleMeanings);
     },
 
-    componentDidMount: function () {
-        if (!this.props.card.id) {
-            return;
-        }
-
-        this.loadMeaningsAndUpdateState(this.props.card);
+    addMeaningFromPossibleMeanings: function (meaningText) {
+        console.log('addMeaningFromPossibleMeanings', meaningText);
+        var card = this.props.card;
+        var meaningModel = this.wrapMeaningText(meaningText);
+        card.card_meanings.push(meaningModel);
+        this.props.handleChange(card);
     },
 
-    componentWillReceiveProps: function (nextProps) {
-        if (!nextProps.card.id) {
-            this.setState({
-                meanings: []
-            });
-            return;
-        }
-
-        if (this.props.card.id === nextProps.card.id) {
-            return;
-        }
-
-        this.loadMeaningsAndUpdateState(nextProps.card);
+    wrapMeaningText: function (text) {
+        return {
+            text: text
+        };
     },
 
-    loadMeanings: function (card) {
-        return api.cardMeaning.get({card: card.id});
-    },
-
-    loadMeaningsAndUpdateState: function (card) {
-        this.loadMeanings(card).then(function (response) {
-            this.setState({
-                meanings: response.results
-            });
-        }.bind(this));
-    },
-
-    addMeaningFromPossibleMeanings: function (meaning) {
-        if (this.state.meanings.indexOf(meaning) === -1) {
-            cardEventEmitter.emitMeaningAddToCard(meaning);
-            this.setState({
-                meanings: this.state.meanings.concat([meaning])
-            });
+    handleDelete: function (index, event) {
+        event.preventDefault();
+        var card = this.props.card;
+        var deleted = card.card_meanings.splice(index, 1);
+        console.log('handleDelete', deleted);
+        if (deleted.length && deleted[0].id) {
+            this.props.handleMeaningDelete(deleted[0]);
         }
+        this.props.handleChange(card);
     },
 
     render: function () {
 
         var meaningsList = null;
 
-        if (this.state.meanings.length) {
-            let meaningNodes = this.state.meanings.map(function (meaning) {
+        if (this.props.card.card_meanings.length) {
+            let meaningNodes = this.props.card.card_meanings.map(function (meaning, index) {
+                var boundDelete = this.handleDelete.bind(this, index);
                 return (
-                    <a href="#" className="list-group-item">{meaning.text}</a>
+                    <a href="#" className="list-group-item" onClick={boundDelete}>{meaning.text}</a>
                 );
-            });
+            }.bind(this));
 
             meaningsList = (
                 <div className="form-group">

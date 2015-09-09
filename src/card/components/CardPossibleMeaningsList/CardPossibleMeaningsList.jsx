@@ -87,7 +87,8 @@ module.exports = React.createClass({
 
     handleClick: function (index, event) {
         event.preventDefault();
-        var meaning = this.state.translationMeanings[index];
+        var meanings = this.getNotIntersectedMeanings();
+        var meaning = meanings[index];
         cardEventEmitter.emitPossibleMeaningClick(meaning);
     },
 
