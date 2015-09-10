@@ -43,7 +43,6 @@ module.exports = React.createClass({
     },
 
     loadTranslation: function (text) {
-        return Promise.resolve({});
         return api.getProfile().then(function (profile) {
             return api.translate(text, profile.target_lang);
         }.bind(this)).catch(function (exception) {
@@ -52,7 +51,6 @@ module.exports = React.createClass({
     },
 
     extractMeaningsFromTranslation: function (translation) {
-        return ['test1', 'test2', 'test3'];
         translation = translation || {};
 
         var meanings = [];

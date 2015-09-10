@@ -56,7 +56,7 @@ module.exports = React.createClass({
 
     loadCardByText: function (text) {
         return api.card.get({text: text}).then(function (response) {
-            return response.results[0] || {};
+            return response.results[0] || {card_meanings: [], text: text};
         });
     },
 
@@ -80,7 +80,7 @@ module.exports = React.createClass({
                               meanings={this.state.meanings}
                               text={this.state.card.text || this.getTextParam(this.props)}
                               handleCardChange={this.handleCardChange}
-                              handleMeaningsChange={this.handleMeaningsChange} />
+                              handleMeaningsChange={this.handleMeaningsChange}/>
                 </div>
                 <div className="col-xs-6">
                     <CardPossibleMeaningsList card={this.state.card}

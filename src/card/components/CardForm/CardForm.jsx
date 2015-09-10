@@ -20,11 +20,44 @@ module.exports = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
         (this.props.card.id ? api.card.put(this.props.card.id, this.props.card) : api.card.post(this.props.card))
-            .then(function () {
-                this.transitionTo('card', this.getParams());
-            }.bind(this)).catch(function (exception) {
+            .then(this.cardSubmitCallback)
+            .catch(function (exception) {
                 this.setState({errors: exception.error});
             }.bind(this));
+    },
+
+    cardSubmitCallback: function (card) {
+        var idsToDelete = this.state.meaningsToDelete.map(function (meaning) {
+            return meaning.id;
+        });
+
+        console.log('idsToDelete', idsToDelete);
+
+        var newMeanings = this.props.meanings.filter(function (meaning) {
+            return !meaning.id;
+        });
+
+        console.log('newMeanings', newMeanings);
+
+        newMeanings = newMeanings.map(function (card, meaning) {
+            meaning.card = card.id;
+            return meaning;
+        }.bind(this, card));
+
+        console.log('newMeanings.mapped', newMeanings);
+
+        var createNewMeanings = function (newMeanings) {
+            api.cardMeaning.post(newMeanings).then(function () {
+                console.log('all done');
+                this.transitionTo('card', this.getParams());
+            }.bind(this));
+        }.bind(this, newMeanings);
+
+        if (idsToDelete.length) {
+            api.cardMeaning.deleteBatch(idsToDelete).then(createNewMeanings);
+        } else {
+            createNewMeanings();
+        }
     },
 
     handleMeaningDeletion: function (meaning) {
