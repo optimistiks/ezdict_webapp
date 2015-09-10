@@ -1,8 +1,12 @@
 {
   "linkToCardCreate": "Create card",
   "cardTextInputLabel": "Text",
-  "cardArticleInputLabel": "Description",
+  "cardArticleInputLabel": "",
   "saveButton": "Save",
   "cardPossibleMeaningsPanelTitle": "Possible meanings of",
-  "cardFormPanelTitle": "Card for"
+  "cardFormPanelTitle": "Card for",
+  "cardFormArticleLabel": "Article",
+  "cardFormMeaningsLabel": "Meanings",
+  "cardFormMeaningPlaceholder": "",
+  "addButtonText": "Add"
 }

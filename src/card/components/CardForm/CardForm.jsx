@@ -31,24 +31,17 @@ module.exports = React.createClass({
             return meaning.id;
         });
 
-        console.log('idsToDelete', idsToDelete);
-
         var newMeanings = this.props.meanings.filter(function (meaning) {
             return !meaning.id;
         });
-
-        console.log('newMeanings', newMeanings);
 
         newMeanings = newMeanings.map(function (card, meaning) {
             meaning.card = card.id;
             return meaning;
         }.bind(this, card));
 
-        console.log('newMeanings.mapped', newMeanings);
-
         var createNewMeanings = function (newMeanings) {
             api.cardMeaning.post(newMeanings).then(function () {
-                console.log('all done');
                 this.transitionTo('card', this.getParams());
             }.bind(this));
         }.bind(this, newMeanings);
@@ -100,7 +93,7 @@ module.exports = React.createClass({
                         </div>
                         <input required type="hidden" name="id" value={this.props.card.id}/>
                         <div className="form-group">
-                            <label htmlFor="text">Описание</label>
+                            <label htmlFor="text">{t('cardFormArticleLabel')}</label>
                             <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}
                                       name="article" value={this.props.card.article} onChange={this.handleCardChange}/>
                         </div>

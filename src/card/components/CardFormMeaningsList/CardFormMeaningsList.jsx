@@ -1,12 +1,17 @@
 var React = require('react');
 
 var api = require('../../../common/modules/api');
+var t = require('../../../common/modules/t');
 var cardEventEmitter = require('../../modules/event-emitter');
 
 
 module.exports = React.createClass({
 
-    handleClick: function (index, event) {
+    getInitialState: function () {
+        return {newMeaningText: ''};
+    },
+
+    handleMeaningClick: function (index, event) {
         event.preventDefault();
         var cardMeanings = this.props.meanings;
         var clickedMeaning = cardMeanings[index];
@@ -17,13 +22,29 @@ module.exports = React.createClass({
         }
     },
 
+    handleNewMeaningTextChange: function (event) {
+        this.setState({
+            newMeaningText: event.target.value
+        });
+    },
+
+    handleAddMeaningClick: function () {
+        var cardMeanings = this.props.meanings;
+        //todo: DRY violation, move CardMeaning structure to model
+        cardMeanings.push({text: this.state.newMeaningText});
+        this.setState({
+            newMeaningText: ''
+        });
+        this.props.handleMeaningsChange(cardMeanings);
+    },
+
     render: function () {
 
         var meaningNodes = null;
 
         if (this.props.meanings.length) {
             meaningNodes = this.props.meanings.map(function (meaning, index) {
-                var boundClick = this.handleClick.bind(this, index);
+                var boundClick = this.handleMeaningClick.bind(this, index);
                 return (
                     <a href="#" className="list-group-item" onClick={boundClick}>{meaning.text}</a>
                 );
@@ -32,20 +53,26 @@ module.exports = React.createClass({
         }
 
         return (
-          <div className="form-group">
-            <label htmlFor="text">Значения</label>
-            <ul className="list-group">
-              {meaningNodes}
-              <li className="list-group-item">
-                <div className="input-group">
-                  <input type="text" className="form-control" placeholder="Значение" />
-                                <span className="input-group-btn">
-                                  <button className="btn btn-info" type="button">Добавить</button>
-                                </span>
-                </div>
-              </li>
-            </ul>
-          </div>
+            <div className="form-group">
+                <label htmlFor="text">{t('cardFormMeaningsLabel')}</label>
+                <ul className="list-group">
+                    {meaningNodes}
+                    <li className="list-group-item">
+                        <div className="input-group">
+                            <input type="text" className="form-control" placeholder={t('cardFormMeaningPlaceholder')}
+                                   value={this.state.newMeaningText}
+                                   onChange={this.handleNewMeaningTextChange}
+                            />
+                            <span className="input-group-btn">
+                              <button className="btn btn-info" type="button"
+                                      onClick={this.handleAddMeaningClick}>
+                                  {t('addButtonText')}
+                              </button>
+                            </span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         );
     }
 });

@@ -86,12 +86,9 @@ module.exports = React.createClass({
 
     getNotIntersectedMeanings: function () {
         var translationMeanings = this.state.translationMeanings;
-        console.log('translationMeanings', translationMeanings);
         var cardMeanings = this.props.meanings.map(function (meaning) {
             return meaning.text;
         });
-        console.log('cardMeanings', cardMeanings);
-
         return translationMeanings.reduce(function (result, meaning) {
             if (cardMeanings.indexOf(meaning) === -1) {
                 result.push(meaning);
@@ -103,8 +100,6 @@ module.exports = React.createClass({
 
     render: function () {
         var meanings = this.getNotIntersectedMeanings();
-        console.log('getNotIntersectedMeanings', meanings);
-
         var meaningNodes = meanings.map(function (text, index) {
             var boundClick = this.handleClick.bind(this, index);
             return (

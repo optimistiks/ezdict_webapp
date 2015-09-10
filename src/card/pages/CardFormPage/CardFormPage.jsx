@@ -75,14 +75,14 @@ module.exports = React.createClass({
     render: function () {
         return (
             <div className="row">
-                <div className="col-xs-6">
+                <div className="col-xs-7">
                     <CardForm card={this.state.card}
                               meanings={this.state.meanings}
                               text={this.state.card.text || this.getTextParam(this.props)}
                               handleCardChange={this.handleCardChange}
                               handleMeaningsChange={this.handleMeaningsChange}/>
                 </div>
-                <div className="col-xs-6">
+                <div className="col-xs-5">
                     <CardPossibleMeaningsList card={this.state.card}
                                               meanings={this.state.meanings}
                                               handleMeaningsChange={this.handleMeaningsChange}
