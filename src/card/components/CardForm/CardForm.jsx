@@ -41,13 +41,13 @@ module.exports = React.createClass({
         }.bind(this, card));
 
         var createNewMeanings = function (newMeanings) {
-            api.cardMeaning.post(newMeanings).then(function () {
+            api.meaning.post(newMeanings).then(function () {
                 this.transitionTo('card', this.getParams());
             }.bind(this));
         }.bind(this, newMeanings);
 
         if (idsToDelete.length) {
-            api.cardMeaning.deleteBatch(idsToDelete).then(createNewMeanings);
+            api.meaning.deleteBatch(idsToDelete).then(createNewMeanings);
         } else {
             createNewMeanings();
         }

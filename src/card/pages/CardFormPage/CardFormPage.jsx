@@ -34,8 +34,8 @@ module.exports = React.createClass({
 
     loadCardAndUpdateState: function (props) {
         return this.loadCard(props).then(function (card) {
-            var meanings = card.card_meanings;
-            delete card.card_meanings;
+            var meanings = card.meanings;
+            delete card.meanings;
             this.setState({
                 card: card,
                 meanings: meanings
