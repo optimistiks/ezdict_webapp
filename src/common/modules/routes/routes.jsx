@@ -8,8 +8,6 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
 var TranslationHistoryPage = require('../../../history/pages/TranslationHistoryPage/TranslationHistoryPage.jsx');
-var LearningWordsPage = require('../../../word/pages/LearningWordsPage/LearningWordsPage.jsx');
-var LearnedWordsPage = require('../../../word/pages/LearnedWordsPage/LearnedWordsPage.jsx');
 var CardPage = require('../../../card/pages/CardPage/CardPage.jsx');
 var CardFormPage = require('../../../card/pages/CardFormPage/CardFormPage.jsx');
 var UserProfilePage = require('../../../profile/pages/UserProfilePage/UserProfilePage.jsx');
@@ -55,14 +53,12 @@ var routes = (
         <DefaultRoute handler={RedirectToDefaultLng}/>
         <Route name="app" path=":lng" handler={App}>
             <Route name="history" handler={TranslationHistoryPage}/>
-            <Route name="learning" handler={LearningWordsPage}/>
-            <Route name="learned" handler={LearnedWordsPage}/>
             <Route name="card" handler={CardPage}/>
             <Route name="card-form" path="card/:id" handler={CardFormPage}/>
             <Route name="profile" handler={UserProfilePage}/>
             <Route name="login" handler={LoginPage}/>
             <Route name="register" handler={RegistrationPage}/>
-            <Redirect from="/:lng" to="history"/>
+            <Redirect from="/:lng" to="card"/>
             <NotFoundRoute handler={NotFoundRouteHandler}/>
         </Route>
     </Route>

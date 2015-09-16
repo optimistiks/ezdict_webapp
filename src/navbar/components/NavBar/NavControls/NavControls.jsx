@@ -27,8 +27,6 @@ module.exports = React.createClass({
         return (
             <div>
                 <ul className="nav navbar-nav">
-                    <NavLi to="learning">{t('Words to learn')}</NavLi>
-                    <NavLi to="learned">{t('Learned words')}</NavLi>
                     <NavLi to="card">{t('Cards')}</NavLi>
                     <NavLi to="history">{t('Translation history')}</NavLi>
                 </ul>

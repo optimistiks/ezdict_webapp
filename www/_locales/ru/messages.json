@@ -22,5 +22,8 @@
   "cardFormMeaningsLabel": "Значения",
   "cardFormArticleLabel": "Описание",
   "cardFormMeaningPlaceholder": "",
-  "addButtonText": "Добавить"
+  "addButtonText": "Добавить",
+  "toStudyLabel": "Изучается",
+  "allCardsFilterLabel": "Все",
+  "toStudyCardsFilterLabel": "Только изучаемые"
 }

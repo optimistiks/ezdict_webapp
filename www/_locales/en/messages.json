@@ -8,5 +8,8 @@
   "cardFormArticleLabel": "Article",
   "cardFormMeaningsLabel": "Meanings",
   "cardFormMeaningPlaceholder": "",
-  "addButtonText": "Add"
+  "addButtonText": "Add",
+  "toStudyLabel": "To study",
+  "allCardsFilterLabel": "All",
+  "toStudyCardsFilterLabel": "To study only"
 }
