@@ -14,7 +14,7 @@ module.exports = React.createClass({
     mixins: [Navigation, State],
 
     getInitialState: function () {
-        return {errors: {}, meaningsToDelete: []};
+        return {errors: {}, meaningsToDelete: [], addToStudy: false};
     },
 
     handleSubmit: function (e) {
@@ -42,7 +42,13 @@ module.exports = React.createClass({
 
         var createNewMeanings = function (newMeanings) {
             api.meaning.post(newMeanings).then(function () {
-                this.transitionTo('card', this.getParams());
+                if (this.state.addToStudy) {
+                    api.toStudy.post({card: card.id}).then(function () {
+                        this.transitionTo('card', this.getParams());
+                    }.bind(this))
+                } else {
+                    this.transitionTo('card', this.getParams());
+                }
             }.bind(this));
         }.bind(this, newMeanings);
 
@@ -64,6 +70,12 @@ module.exports = React.createClass({
         this.props.handleCardChange(card);
     },
 
+    handleAddToStudyChange: function (event) {
+        this.setState({
+            addToStudy: event.target.checked
+        });
+    },
+
     render: function () {
         var errors = [];
 
@@ -76,6 +88,20 @@ module.exports = React.createClass({
                 <p className="text-danger">{error}</p>
             );
         });
+
+        var toStudyLabel = null;
+        if (this.props.card.to_study) {
+            toStudyLabel = <span className="label label-primary">{t('toStudyLabel')}</span>;
+        } else {
+            toStudyLabel = (<div className="checkbox">
+                <label>
+                    <input type="checkbox"
+                           checked={this.state.addToStudy}
+                           onChange={this.handleAddToStudyChange}
+                    > Check me out </input>
+                </label>
+            </div>)
+        }
 
         return (
             <form onSubmit={this.handleSubmit}>
@@ -92,6 +118,9 @@ module.exports = React.createClass({
                             </div>
                         </div>
                         <input required type="hidden" name="id" value={this.props.card.id}/>
+                        <div className="form-group">
+                            {toStudyLabel}
+                        </div>
                         <div className="form-group">
                             <label htmlFor="text">{t('cardFormArticleLabel')}</label>
                             <textarea className="form-control" id="article" placeholder={t('cardArticleInputLabel')}
