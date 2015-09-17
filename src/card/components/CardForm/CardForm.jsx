@@ -91,7 +91,7 @@ module.exports = React.createClass({
 
         var toStudyLabel = null;
         if (this.props.card.to_study) {
-            toStudyLabel = <span className="label label-primary">{t('toStudyLabel')}</span>;
+            toStudyLabel = <span className="label label-info">{t('toStudyLabel')}</span>;
         } else {
             toStudyLabel = (<div className="checkbox">
                 <label>

@@ -53,7 +53,7 @@ module.exports = React.createClass({
             .map(function (card) {
                 var toStudyLabel = null;
                 if (card.to_study) {
-                    toStudyLabel = <span className="label label-primary">{t('toStudyLabel')}</span>;
+                    toStudyLabel = <span className="label label-info">{t('toStudyLabel')}</span>;
                 }
                 return (
                     <Link to="card-form" params={{id: card.id}} className="list-group-item">
