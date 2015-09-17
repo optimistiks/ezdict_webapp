@@ -98,7 +98,7 @@ module.exports = React.createClass({
                     <input type="checkbox"
                            checked={this.state.addToStudy}
                            onChange={this.handleAddToStudyChange}
-                    > Check me out </input>
+                    >{t('addToStudyCheckboxLabel')}</input>
                 </label>
             </div>)
         }

@@ -25,5 +25,6 @@
   "addButtonText": "Добавить",
   "toStudyLabel": "Изучается",
   "allCardsFilterLabel": "Все",
-  "toStudyCardsFilterLabel": "Только изучаемые"
+  "toStudyCardsFilterLabel": "Только изучаемые",
+  "addToStudyCheckboxLabel": "Добавить в изучаемые"
 }

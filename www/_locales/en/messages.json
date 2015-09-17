@@ -11,5 +11,6 @@
   "addButtonText": "Add",
   "toStudyLabel": "To study",
   "allCardsFilterLabel": "All",
-  "toStudyCardsFilterLabel": "To study only"
+  "toStudyCardsFilterLabel": "To study only",
+  "addToStudyCheckboxLabel": "Add to study"
 }

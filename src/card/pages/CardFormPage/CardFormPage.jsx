@@ -56,7 +56,8 @@ module.exports = React.createClass({
 
     loadCardByText: function (text) {
         return api.card.get({text: text}).then(function (response) {
-            return response.results[0] || {card_meanings: [], text: text};
+            //todo: card model structure should not be defined here
+            return response.results[0] || {meanings: [], text: text};
         });
     },
 
