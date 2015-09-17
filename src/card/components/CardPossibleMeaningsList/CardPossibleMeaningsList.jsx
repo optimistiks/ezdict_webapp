@@ -21,7 +21,7 @@ module.exports = React.createClass({
             return;
         }
 
-        this.loadTranslationAndUpdateState(this.props);
+        this.loadSuggestedMeaningsAndUpdateState(this.props);
     },
 
     componentWillReceiveProps: function (nextProps) {
@@ -29,50 +29,25 @@ module.exports = React.createClass({
             return;
         }
 
-        this.loadTranslationAndUpdateState(nextProps);
+        this.loadSuggestedMeaningsAndUpdateState(nextProps);
     },
 
-    loadTranslationAndUpdateState: function (props) {
-        this.loadTranslation(props.text).then(function (translation) {
+    loadSuggestedMeaningsAndUpdateState: function (props) {
+        this.loadSuggestedMeanings(props.text).then(function (suggestedMeanings) {
             this.setState({
-                translationMeanings: this.extractMeaningsFromTranslation(translation)
+                translationMeanings: suggestedMeanings
             });
         }.bind(this)).catch(function (exception) {
             console.error(exception);
         });
     },
 
-    loadTranslation: function (text) {
+    loadSuggestedMeanings: function (text) {
         return api.getProfile().then(function (profile) {
-            return api.translate(text, profile.target_lang);
+            return api.suggestedMeaning.get(text, profile.target_lang);
         }.bind(this)).catch(function (exception) {
             console.error(exception);
         });
-    },
-
-    extractMeaningsFromTranslation: function (translation) {
-        translation = translation || {};
-
-        var meanings = [];
-
-        if (translation.translation) {
-            meanings.push(translation.translation);
-        }
-
-        if (translation.ya_dict && translation.ya_dict.def.length) {
-            translation.ya_dict.def.forEach(function (def) {
-                def.tr.forEach(function (defTr) {
-                    meanings.push(defTr.text);
-                    if (defTr.syn) {
-                        defTr.syn.forEach(function (defTrSyn) {
-                            meanings.push(defTrSyn.text);
-                        });
-                    }
-                });
-            });
-        }
-
-        return meanings;
     },
 
     handleClick: function (index, event) {
