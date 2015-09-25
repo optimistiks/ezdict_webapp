@@ -19,8 +19,6 @@ module.exports = React.createClass({
                 return (
                     <Link to="quiz-form" params={{id: quiz.id}} className="list-group-item">
                         <h4 className="list-group-item-heading">Тест #{quiz.id} от {quiz.created}</h4>
-
-                        <p className="list-group-item-text">{card.article}</p>
                     </Link>
                 );
             });
