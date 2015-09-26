@@ -30,14 +30,8 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        var errors = [];
-
-        Object.keys(this.state.errors).forEach(function (key) {
-            errors.push(this.state.errors[key]);
-        }.bind(this));
-
-        // todo: separated block, which will handle the completed quiz case
-        var quizCardNodes = this.prop.quiz.quiz_cards.map(function (quizCard) {
+        console.log('rendering quizform, props are', this.props);
+        var quizCardNodes = this.props.quiz.quiz_cards.map(function (quizCard) {
             var answerNodes = quizCard.card.meanings.map(function () {
                 //todo: bind a change handler to input, with signature handler(quiz_card, event)
                 return (

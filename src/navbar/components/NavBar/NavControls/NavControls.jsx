@@ -27,6 +27,7 @@ module.exports = React.createClass({
         return (
             <div>
                 <ul className="nav navbar-nav">
+                    <NavLi to="quiz">{t('linkToQuizzesSectionText')}</NavLi>
                     <NavLi to="card">{t('Cards')}</NavLi>
                     <NavLi to="history">{t('Translation history')}</NavLi>
                 </ul>

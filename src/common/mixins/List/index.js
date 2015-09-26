@@ -1,3 +1,6 @@
+var React = require('react');
+var t = require('../../modules/t');
+
 module.exports = {
 
     next: 1,

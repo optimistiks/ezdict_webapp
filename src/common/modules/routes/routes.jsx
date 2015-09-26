@@ -8,8 +8,8 @@ var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
 
 var TranslationHistoryPage = require('../../../history/pages/TranslationHistoryPage/TranslationHistoryPage.jsx');
-var QuizPage = require('../../../card/pages/QuizPage/QuizPage.jsx');
-var QuizFormPage = require('../../../card/pages/QuizFormPage/QuizFormPage.jsx');
+var QuizPage = require('../../../quiz/pages/QuizPage/QuizPage.jsx');
+var QuizFormPage = require('../../../quiz/pages/QuizFormPage/QuizFormPage.jsx');
 var CardPage = require('../../../card/pages/CardPage/CardPage.jsx');
 var CardFormPage = require('../../../card/pages/CardFormPage/CardFormPage.jsx');
 var UserProfilePage = require('../../../profile/pages/UserProfilePage/UserProfilePage.jsx');

@@ -9,7 +9,7 @@ module.exports = React.createClass({
 
     mixins: [List],
 
-    getter: api.quiz.get,
+    getter: api.quizzes.get.bind(api.quizzes),
 
     render: function () {
         var quizNodes = this.state.items
