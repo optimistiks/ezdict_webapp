@@ -23,8 +23,21 @@
   "cardFormArticleLabel": "Описание",
   "cardFormMeaningPlaceholder": "",
   "addButtonText": "Добавить",
-  "toStudyLabel": "Изучается",
+  "cardToStudyLabel": "Изучается",
+  "cardIsLearnedLabel": "Изучена",
   "allCardsFilterLabel": "Все",
   "toStudyCardsFilterLabel": "Только изучаемые",
-  "addToStudyCheckboxLabel": "Добавить в изучаемые"
+  "addToStudyCheckboxLabel": "Добавить в изучаемые",
+  "correctQuizAnswerLabel": "Верно",
+  "incorrectQuizAnswerLabel": "Неверно",
+  "quizAnswerNotGiven": "Ответ не дан",
+  "startToStudyQuiz": "Начать тест по изучаемым карточкам",
+  "startIsLearnedQuiz": "Начать тест по изученным карточкам",
+  "quizTypeLabel_to_study": "По изучаемым",
+  "quizTypeLabel_is_learned": "По изученным",
+  "quizListItemHeader": "Тест",
+  "quizCreatedLabel": "Создан",
+  "quizCompletedlabel": "Завершен ",
+  "linkToQuizzesSectionText": "Тесты",
+  "errorPopupHeader": "Произошла ошибка."
 }

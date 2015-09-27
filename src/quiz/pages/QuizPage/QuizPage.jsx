@@ -6,6 +6,7 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var State = Router.State;
 var api = require('../../../common/modules/api');
+var appEventEmitter = require('../../../common/modules/event-emitter');
 
 
 module.exports = React.createClass({
@@ -19,8 +20,7 @@ module.exports = React.createClass({
             params['id'] = quiz.id;
             this.transitionTo('quiz-form', params);
         }.bind(this)).catch(function (exception) {
-            // todo: handle error when no available cards
-            throw exception
+            appEventEmitter.emitRequestException(exception)
         })
     },
 

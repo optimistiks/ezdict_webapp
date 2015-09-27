@@ -18,32 +18,47 @@ module.exports = React.createClass({
                 answersByQuizCard[quizAnswer.quiz_card] = [];
             }
             answersByQuizCard[quizAnswer.quiz_card].push(quizAnswer);
+            return answersByQuizCard;
         }, {});
 
-        var quizCardNodes = this.prop.quiz.quiz_cards.map(function (quizCard) {
-            var answerNodes = answersMap[quizCard.id].map(function (answer) {
-                return (
-                    <p>{answer.text}</p>
-                )
-            });
+        var quizCardNodes = this.props.quiz.quiz_cards.map(function (quizCard) {
 
-            var meaningNodes = quizCard.card.meanings.map(function (meaning) {
+            var answerNodes = answersMap[quizCard.id].map(function (answer) {
+
+                var isCorrectLabel = answer.is_correct ?
+                    <span className="label label-success">{t('correctQuizAnswerLabel')}</span> :
+                    <span className="label label-danger">{t('incorrectQuizAnswerLabel')}</span>;
+
+                var answerTextClass = answer.text ?
+                    (answer.is_correct ? 'text-success' : 'text-danger') :
+                    'text-muted';
+
+                var answerTextContent = answer.text || t('quizAnswerNotGiven');
+
                 return (
-                    <p>{meaning.text}</p>
+                    <li className="form-group">
+                        <p className={answerTextClass}>{answerTextContent} {isCorrectLabel}</p>
+                    </li>
                 )
-            });
+            }.bind(this));
 
             return (
-                <div>
-                    <p>{quizCard.card.text}</p>
-                    {answerNodes}
-                    {meaningNodes}
-                </div>
+                <fieldset ref={'quizCard' + quizCard.id}>
+                    <div className="form-group">
+                        <label for="exampleInputEmail1">{quizCard.card.text}</label>
+                    </div>
+                    <ol>
+                        {answerNodes}
+                    </ol>
+                </fieldset>
             );
-        });
+
+        }.bind(this));
 
         return (
-         {quizCardNodes}
+            <form>
+                {quizCardNodes}
+            </form>
         );
     }
 });

@@ -89,11 +89,13 @@ module.exports = React.createClass({
             );
         });
 
-        var toStudyLabel = null;
+        var statusBlock = null;
         if (this.props.card.to_study) {
-            toStudyLabel = <span className="label label-info">{t('toStudyLabel')}</span>;
-        } else {
-            toStudyLabel = (<div className="checkbox">
+            statusBlock = <span className="label label-info">{t('cardToStudyLabel')}</span>;
+        }
+
+        if (!this.props.card.to_study && !this.props.card.is_learned) {
+            statusBlock = (<div className="checkbox">
                 <label>
                     <input type="checkbox"
                            checked={this.state.addToStudy}
@@ -101,6 +103,10 @@ module.exports = React.createClass({
                     >{t('addToStudyCheckboxLabel')}</input>
                 </label>
             </div>)
+        }
+
+        if (this.props.card.is_learned) {
+            statusBlock = (<span className="label label-success">{t('cardIsLearnedLabel')}</span>)
         }
 
         return (
@@ -119,7 +125,7 @@ module.exports = React.createClass({
                         </div>
                         <input required type="hidden" name="id" value={this.props.card.id}/>
                         <div className="form-group">
-                            {toStudyLabel}
+                            {statusBlock}
                         </div>
                         <div className="form-group">
                             <label htmlFor="text">{t('cardFormArticleLabel')}</label>

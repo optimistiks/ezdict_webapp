@@ -2,7 +2,6 @@ var React = require('react');
 
 var api = require('../../../common/modules/api');
 var t = require('../../../common/modules/t');
-var cardEventEmitter = require('../../modules/event-emitter');
 
 
 module.exports = React.createClass({

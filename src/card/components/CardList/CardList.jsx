@@ -53,13 +53,17 @@ module.exports = React.createClass({
             .map(function (card) {
                 var toStudyLabel = null;
                 if (card.to_study) {
-                    toStudyLabel = <span className="label label-info">{t('toStudyLabel')}</span>;
+                    toStudyLabel = <span className="label label-info">{t('cardToStudyLabel')}</span>;
+                }
+                var isLearnedLabel = null;
+                if (card.is_learned) {
+                    isLearnedLabel = <span className="label label-success">{t('cardIsLearnedLabel')}</span>;
                 }
                 return (
                     <Link to="card-form" params={{id: card.id}} className="list-group-item">
                         <h4 className="list-group-item-heading">{card.text}</h4>
                         <p className="list-group-item-text">{card.article}</p>
-                        {toStudyLabel}
+                        {toStudyLabel}{isLearnedLabel}
                     </Link>
                 );
             });

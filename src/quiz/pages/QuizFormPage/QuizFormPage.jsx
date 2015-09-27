@@ -17,33 +17,33 @@ module.exports = React.createClass({
     mixins: [AuthCheck, State],
 
     getInitialState: function () {
-        console.log('quizFormPage.getInitialState');
         return {quiz: {quiz_cards: []}, quizAnswers: []};
     },
 
     componentDidMount: function () {
-        console.log('quizFormPage.componentDidMount');
         this.loadQuizAndUpdateState(this.props);
     },
 
     componentWillReceiveProps: function (nextProps) {
-        console.log('quizFormPage.componentWillReceiveProps');
         if (nextProps.params.id !== this.props.params.id) {
             this.loadQuizAndUpdateState(nextProps);
         }
     },
 
     loadQuizAndUpdateState: function (props) {
-        console.log('quizFormPage.loadQuizAndUpdateState', props);
-        return this.loadQuiz(props).then(function (quiz) {
-            var quizAnswers = quiz.quiz_answers;
-            delete quiz.quiz_answers;
-            this.setState({
-                quiz: quiz,
-                quizAnswers: quizAnswers
+        return this.loadQuiz(props)
+            .then(this.updateStateWithQuiz)
+            .catch(function (exception) {
+                console.error(exception);
             });
-        }.bind(this)).catch(function (exception) {
-            console.error(exception);
+    },
+
+    updateStateWithQuiz: function (quiz) {
+        var quizAnswers = quiz.quiz_answers;
+        delete quiz.quiz_answers;
+        this.setState({
+            quiz: quiz,
+            quizAnswers: quizAnswers
         });
     },
 
@@ -52,30 +52,27 @@ module.exports = React.createClass({
     },
 
     handleQuizChange: function (quiz) {
-        this.setState({quiz: quiz});
-    },
-
-    handleQuizAnswersChange: function (quizAnswers) {
-        this.setState({quizAnswers: quizAnswers});
+        this.updateStateWithQuiz(quiz);
     },
 
     render: function () {
-        console.log('rendering quizFormPage, state is', this.state);
 
-        var block = this.state.quizAnswers.length ? (
+        var block = this.state.quiz.completed ? (
             <QuizCompletedView quiz={this.state.quiz}
                                quizAnswers={this.state.quizAnswers}/>
         ) : (
             <QuizForm quiz={this.state.quiz}
                       quizAnswers={this.state.quizAnswers}
-                // todo: may be unneeded
-                      handleQuizChange={this.handleQuizChange}
-                      handleQuizAnswersChange={this.handleQuizAnswersChange}/>
+                      handleQuizChange={this.handleQuizChange}/>
         );
         return (
             <div className="row">
                 <div className="col-xs-12">
-                    {block}
+                    <div className="row">
+                        <div className="col-xs-6">
+                            {block}
+                        </div>
+                    </div>
                 </div>
             </div>
         );

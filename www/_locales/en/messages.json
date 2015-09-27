@@ -9,8 +9,21 @@
   "cardFormMeaningsLabel": "Meanings",
   "cardFormMeaningPlaceholder": "",
   "addButtonText": "Add",
-  "toStudyLabel": "To study",
+  "cardToStudyLabel": "To study",
+  "cardIsLearnedLabel": "Is learned",
   "allCardsFilterLabel": "All",
   "toStudyCardsFilterLabel": "To study only",
-  "addToStudyCheckboxLabel": "Add to study"
+  "addToStudyCheckboxLabel": "Add to study",
+  "correctQuizAnswerLabel": "Correct",
+  "incorrectQuizAnswerLabel": "Incorrect",
+  "quizAnswerNotGiven": "Empty answer was given",
+  "startToStudyQuiz": "Start quiz using cards under study",
+  "startIsLearnedQuiz": "Start quiz using learned cards",
+  "quizTypeLabel_to_study": "On cards to study",
+  "quizTypeLabel_is_learned": "On learned cards",
+  "quizListItemHeader": "Quiz",
+  "quizCreatedLabel": "Created at ",
+  "quizCompletedlabel": "Completed at ",
+  "linkToQuizzesSectionText": "Quizzes",
+  "errorPopupHeader": "There was an error."
 }

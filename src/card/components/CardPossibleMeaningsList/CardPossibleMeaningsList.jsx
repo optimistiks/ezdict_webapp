@@ -3,7 +3,6 @@ var Promise = require('bluebird');
 var auth = require('../../../common/modules/auth');
 var api = require('../../../common/modules/api');
 var t = require('../../../common/modules/t');
-var cardEventEmitter = require('../../modules/event-emitter');
 
 
 module.exports = React.createClass({

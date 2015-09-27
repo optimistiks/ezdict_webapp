@@ -9,7 +9,7 @@ var Form = require('../../../common/mixins/Form');
 var Link = require('../../../common/components/Link/Link.jsx');
 var auth = require('../../../common/modules/auth');
 var t = require('../../../common/modules/t');
-
+var appEventEmitter = require('../../../common/modules/event-emitter');
 
 module.exports = React.createClass({
 
@@ -22,8 +22,8 @@ module.exports = React.createClass({
             .then(function () {
                 this.transitionTo('app', this.getParams());
             }.bind(this)).catch(function (exception) {
-                this.setState({errors: exception.error});
-            }.bind(this));
+            appEventEmitter.emitRequestException(exception);
+        }.bind(this));
     },
 
     getInitialState: function () {
@@ -31,25 +31,8 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        var errors = [];
-
-        Object.keys(this.state.errors).forEach(function (key) {
-            errors.push(this.state.errors[key]);
-        }.bind(this));
-
-        var errorNodes = errors.map(function (error) {
-            return (
-                <p className="text-danger">{error}</p>
-            );
-        });
-
         return (
             <form onSubmit={this.handleSubmit}>
-                <div className="row">
-                    <div className="col-xs-12 text-center">
-                        {errorNodes}
-                    </div>
-                </div>
                 <div className="form-group">
                     <label htmlFor="username">{t('Username')}</label>
                     <input required type="text" className="form-control" id="username" placeholder={t('Username')}
