@@ -2,6 +2,7 @@ var React = require('react');
 var AuthCheck = require('../../../common/mixins/AuthCheck');
 var QuizList = require('../../components/QuizList/QuizList.jsx');
 var t = require('../../../common/modules/t');
+var Button = require('../../../common/components/Button/Button.jsx');
 var Router = require('react-router');
 var Navigation = Router.Navigation;
 var State = Router.State;
@@ -13,7 +14,12 @@ module.exports = React.createClass({
 
     mixins: [AuthCheck, Navigation, State],
 
+    getInitialState: function () {
+        return {requestInProgress: false};
+    },
+
     startQuiz: function (type) {
+        this.toggleButtons();
         var data = {type: type};
         api.quizzes.post(data).then(function (quiz) {
             var params = this.getParams();
@@ -21,7 +27,9 @@ module.exports = React.createClass({
             this.transitionTo('quiz-form', params);
         }.bind(this)).catch(function (exception) {
             appEventEmitter.emitRequestException(exception)
-        })
+        }).finally(function () {
+            this.toggleButtons();
+        }.bind(this))
     },
 
     startToStudyQuiz: function () {
@@ -32,6 +40,10 @@ module.exports = React.createClass({
         this.startQuiz('is_learned');
     },
 
+    toggleButtons: function () {
+        this.setState({requestInProgress: !this.state.requestInProgress});
+    },
+
     render: function () {
         return (
             <div className="row">
@@ -40,12 +52,14 @@ module.exports = React.createClass({
                         <div className="col-xs-12">
                             <ul className="list-inline">
                                 <li>
-                                    <button type="button" onClick={this.startToStudyQuiz}
-                                            className="btn btn-primary">{t('startToStudyQuiz')}</button>
+                                    <Button type="button" onClick={this.startToStudyQuiz}
+                                            disabled={this.state.requestInProgress}
+                                            className="btn-primary" buttonText={t('startToStudyQuiz')}/>
                                 </li>
                                 <li>
-                                    <button type="button" onClick={this.startIsLearnedQuiz}
-                                            className="btn btn-info">{t('startIsLearnedQuiz')}</button>
+                                    <Button type="button" onClick={this.startIsLearnedQuiz}
+                                            disabled={this.state.requestInProgress}
+                                            className="btn-info" buttonText={t('startIsLearnedQuiz')}/>
                                 </li>
                             </ul>
                         </div>
