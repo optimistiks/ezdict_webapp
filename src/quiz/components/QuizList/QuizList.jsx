@@ -12,8 +12,8 @@ module.exports = React.createClass({
     getter: api.quizzes.get.bind(api.quizzes),
 
     render: function () {
-        var quizNodes = this.state.items
-            .map(function (quiz) {
+        var quizNodes = this.state.items.length ?
+            this.state.items.map(function (quiz) {
                 //todo filter by to study, by is learned, by completed
 
                 var quizTypeLabel = <span className="label label-info">{t('quizTypeLabel_' + quiz.type)}</span>;
@@ -30,7 +30,7 @@ module.exports = React.createClass({
                         <div className="list-group-item-text">{quizTypeLabel} {quizCreatedLabel} {quizCompletedLabel}</div>
                     </Link>
                 );
-            });
+            }) : <p className="text-muted">{t('noQuizzesText')}</p>;
 
         var moreButton = this.getMoreButton();
 

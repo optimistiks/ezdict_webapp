@@ -14,7 +14,7 @@
   "Profile": "Профиль",
   "More": "Еще",
   "linkToCardCreate": "Создать карточку",
-  "cardTextInputLabel": "Текст",
+  "cardTextInputLabel": "Слово или выражение",
   "cardArticleInputLabel": "",
   "saveButton": "Сохранить",
   "cardPossibleMeaningsPanelTitle": "Возможные значения",
@@ -39,5 +39,8 @@
   "quizCreatedLabel": "Создан",
   "quizCompletedlabel": "Завершен ",
   "linkToQuizzesSectionText": "Тесты",
-  "errorPopupHeader": "Произошла ошибка."
+  "errorPopupHeader": "Произошла ошибка.",
+  "noQuizzesText": "У вас еще нет тестов. Сначала создайте несколько карточек, и добавьте их в изучаемые.",
+  "noCardsText": "У вас еще нет карточек.",
+  "createCardButtonText": "Создать карточку"
 }

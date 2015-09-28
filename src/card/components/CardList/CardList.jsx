@@ -46,8 +46,8 @@ module.exports = React.createClass({
     },
 
     render: function () {
-        var cardNodes = this.state.cards
-            .filter(function (card) {
+        var cardNodes = this.state.cards.length ?
+            this.state.cards.filter(function (card) {
                 return !this.state.filterToStudy || card.to_study
             }.bind(this))
             .map(function (card) {
@@ -66,7 +66,7 @@ module.exports = React.createClass({
                         {toStudyLabel}{isLearnedLabel}
                     </Link>
                 );
-            });
+            }) : <p className="text-muted">{t('noCardsText')}</p>;
 
         var moreButton = this.next ?
             <button type="button" className="btn btn-default btn-block" onClick={this.loadCards}>{t('More')}</button>
