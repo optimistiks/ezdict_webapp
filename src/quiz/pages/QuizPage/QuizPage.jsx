@@ -54,12 +54,12 @@ module.exports = React.createClass({
                                 <li>
                                     <Button type="button" onClick={this.startToStudyQuiz}
                                             disabled={this.state.requestInProgress}
-                                            className="btn-primary" buttonText={t('startToStudyQuiz')}/>
+                                            className="btn-info" buttonText={t('startToStudyQuiz')}/>
                                 </li>
                                 <li>
                                     <Button type="button" onClick={this.startIsLearnedQuiz}
                                             disabled={this.state.requestInProgress}
-                                            className="btn-info" buttonText={t('startIsLearnedQuiz')}/>
+                                            className="btn-success" buttonText={t('startIsLearnedQuiz')}/>
                                 </li>
                             </ul>
                         </div>

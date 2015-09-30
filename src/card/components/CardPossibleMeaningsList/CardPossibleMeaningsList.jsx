@@ -44,9 +44,7 @@ module.exports = React.createClass({
     loadSuggestedMeanings: function (text) {
         return api.getProfile().then(function (profile) {
             return api.suggestedMeaning.get(text, profile.target_lang);
-        }.bind(this)).catch(function (exception) {
-            console.error(exception);
-        });
+        }.bind(this));
     },
 
     handleClick: function (index, event) {

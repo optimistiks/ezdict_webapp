@@ -72,7 +72,7 @@ module.exports = React.createClass({
         return (
             <form onSubmit={this.handleSubmit}>
                 {quizCardNodes}
-                <button type="submit" className="btn btn-lg btn-block btn-success">{t('saveButton')}</button>
+                <button type="submit" className="btn btn-block btn-success">{t('saveButton')}</button>
             </form>
         );
     }

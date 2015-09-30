@@ -32,7 +32,7 @@ module.exports = React.createClass({
                                        placeholder={t('cardTextInputLabel')}/>
                             </div>
                             &nbsp;
-                            <button type="submit" className="btn btn-default">{t('createCardButtonText')}</button>
+                            <button type="submit" className="btn btn-success">{t('createCardButtonText')}</button>
                         </form>
                     </div>
                     <CardList/>

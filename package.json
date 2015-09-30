@@ -30,5 +30,5 @@
     "uglify-js": "~2.4.24"
   },
   "browser": {},
-  "style": []
+  "style": ["src/common/styles/flatly.bootstrap.min.css"]
 }
