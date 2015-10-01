@@ -29,9 +29,9 @@
     }
 })(document, window, "yandex_metrika_callbacks");
 
-var metrika = {
+var pool = [];
 
-    pool: [],
+var metrika = {
 
     getCounter: function () {
         return global.yaCounter32784550;
@@ -44,20 +44,21 @@ var metrika = {
             counter.reachGoal.apply(counter, arguments);
         } else {
             console.log('counter NOT exists, adding to pool');
-            this.pool.push(arguments);
+            pool.push(arguments);
         }
     }
 };
 
 var interval = global.setInterval(function () {
-    console.log('check for counter in the interval, pool = ', metrika.pool);
+    console.log('check for counter in the interval, pool = ', pool);
     if (metrika.getCounter()) {
-        console.log('counter found, clear interval, processing pool', metrika.pool);
+        console.log('counter found, clear interval, processing pool', pool);
         global.clearInterval(interval);
-        metrika.pool.forEach(function (args) {
+        pool.forEach(function (args) {
             console.log('processing pool element', args);
             metrika.getCounter().reachGoal.apply(metrika.getCounter(), args)
-        })
+        });
+        pool = [];
     }
 }, 500);
 

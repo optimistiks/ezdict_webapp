@@ -17,7 +17,7 @@ auth.saveTokenFromExtension = function () {
         return browserExtension.getToken().then(function (token) {
             return tokenStorage.saveToken(token);
         }).catch(function () {
-            console.info('No extension detected');
+            console.info('Can\'t get token from extension.');
         });
     } else {
         var deferred = Promise.pending();
@@ -57,7 +57,9 @@ auth.logout = function () {
 auth.login = function (formData) {
     return api.login(formData).then(function (response) {
         if (browserExtension) {
-            browserExtension.saveToken(response.auth_token);
+            browserExtension.saveToken(response.auth_token).catch(function () {
+                console.info('Can\'t save token to extension.');
+            });
         }
         return response;
     });
@@ -66,7 +68,9 @@ auth.login = function (formData) {
 auth.register = function (formData) {
     return api.register(formData).then(function (response) {
         if (browserExtension) {
-            browserExtension.saveToken(response.auth_token);
+            browserExtension.saveToken(response.auth_token).catch(function () {
+              console.info('Can\'t save token to extension.');
+            });
         }
         return response;
     });
