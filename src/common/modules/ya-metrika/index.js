@@ -40,22 +40,17 @@ var metrika = {
     reachGoal: function () {
         var counter = this.getCounter();
         if (counter) {
-            console.log('counter exists, applying directly');
             counter.reachGoal.apply(counter, arguments);
         } else {
-            console.log('counter NOT exists, adding to pool');
             pool.push(arguments);
         }
     }
 };
 
 var interval = global.setInterval(function () {
-    console.log('check for counter in the interval, pool = ', pool);
     if (metrika.getCounter()) {
-        console.log('counter found, clear interval, processing pool', pool);
         global.clearInterval(interval);
         pool.forEach(function (args) {
-            console.log('processing pool element', args);
             metrika.getCounter().reachGoal.apply(metrika.getCounter(), args)
         });
         pool = [];
