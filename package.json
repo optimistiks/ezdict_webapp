@@ -1,6 +1,6 @@
 {
   "name": "ezdict_webapp",
-  "version": "0.0.0",
+  "version": "0.4.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -20,7 +20,7 @@
     "react": "~0.13.3",
     "react-router": "~0.13.3",
     "bluebird": "~2.9.34",
-    "ezdict-api-client": "git://github.com/optimistiks/ezdict_api_client#master"
+    "ezdict-api-client": "git://github.com/optimistiks/ezdict_api_client#0.4.0"
   },
   "devDependencies": {
     "browserify": "~11.0.1",
