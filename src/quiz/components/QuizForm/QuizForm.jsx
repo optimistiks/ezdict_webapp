@@ -6,6 +6,7 @@ var State = Router.State;
 var $ = require('jquery');
 var api = require('../../../common/modules/api');
 var t = require('../../../common/modules/t');
+var metrika = require('../../../common/modules/ya-metrika');
 
 
 module.exports = React.createClass({
@@ -35,6 +36,7 @@ module.exports = React.createClass({
 
         api.quizAnswers.post(answers)
             .then(function () {
+                metrika.reachGoal('QUIZ_COMPLETED', {type: this.props.quiz.type});
                 return api.quizzes.get(this.props.quiz.id);
             }.bind(this))
             .then(function (quiz) {

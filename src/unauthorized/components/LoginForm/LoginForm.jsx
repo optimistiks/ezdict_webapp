@@ -10,6 +10,8 @@ var Link = require('../../../common/components/Link/Link.jsx');
 var auth = require('../../../common/modules/auth');
 var t = require('../../../common/modules/t');
 var appEventEmitter = require('../../../common/modules/event-emitter');
+var metrika = require('../../../common/modules/ya-metrika');
+
 
 module.exports = React.createClass({
 
@@ -20,6 +22,7 @@ module.exports = React.createClass({
         var formData = this.serializeAsKeyValue();
         auth.login(formData)
             .then(function () {
+                metrika.reachGoal('LOGIN');
                 this.transitionTo('app', this.getParams());
             }.bind(this)).catch(function (exception) {
             appEventEmitter.emitRequestException(exception);

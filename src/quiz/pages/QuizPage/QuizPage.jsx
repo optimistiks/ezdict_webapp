@@ -7,6 +7,7 @@ var Router = require('react-router');
 var Navigation = Router.Navigation;
 var State = Router.State;
 var api = require('../../../common/modules/api');
+var metrika = require('../../../common/modules/ya-metrika');
 var appEventEmitter = require('../../../common/modules/event-emitter');
 
 
@@ -22,6 +23,7 @@ module.exports = React.createClass({
         this.toggleButtons();
         var data = {type: type};
         api.quizzes.post(data).then(function (quiz) {
+            metrika.reachGoal('QUIZ_CREATED', {type: quiz.type});
             var params = this.getParams();
             params['id'] = quiz.id;
             this.transitionTo('quiz-form', params);

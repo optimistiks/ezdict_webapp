@@ -13,7 +13,7 @@ chromeExtension.getToken = function () {
         if (token) {
             deferred.resolve(token);
         } else {
-            deferred.reject();
+            deferred.reject('Can\'t get token from chrome extension.');
         }
     });
     return deferred.promise;
@@ -25,7 +25,7 @@ chromeExtension.saveToken = function (token) {
         if (token) {
             deferred.resolve(token);
         } else {
-            deferred.reject();
+            deferred.reject('Can\'t save token to chrome extension.');
         }
     });
     return deferred.promise;

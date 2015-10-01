@@ -9,6 +9,7 @@ var auth = require('../../../common/modules/auth');
 var t = require('../../../common/modules/t');
 var Form = require('../../../common/mixins/Form');
 var appEventEmitter = require('../../../common/modules/event-emitter');
+var metrika = require('../../../common/modules/ya-metrika');
 
 
 module.exports = React.createClass({
@@ -20,6 +21,7 @@ module.exports = React.createClass({
         var formData = this.serializeAsKeyValue();
         auth.register(formData)
             .then(function () {
+                metrika.reachGoal('REGISTRATION');
                 this.transitionTo('app', this.getParams());
             }.bind(this)).catch(function (exception) {
             appEventEmitter.emitRequestException(exception);

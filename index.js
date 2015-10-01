@@ -1,5 +1,6 @@
 global.jQuery = require('jquery');
 require('bootstrap');
+require('./src/common/modules/ya-metrika');
 var React = require('react');
 var Router = require('react-router');
 var i18n = require('./src/common/modules/i18n');

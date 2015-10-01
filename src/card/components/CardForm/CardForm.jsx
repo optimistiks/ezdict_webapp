@@ -5,6 +5,7 @@ var State = Router.State;
 
 var api = require('../../../common/modules/api');
 var t = require('../../../common/modules/t');
+var metrika = require('../../../common/modules/ya-metrika');
 
 var CardFormMeaningsList = require('../CardFormMeaningsList/CardFormMeaningsList.jsx');
 
@@ -19,7 +20,10 @@ module.exports = React.createClass({
 
     handleSubmit: function (e) {
         e.preventDefault();
-        (this.props.card.id ? api.card.put(this.props.card.id, this.props.card) : api.card.post(this.props.card))
+        (this.props.card.id ? api.card.put(this.props.card.id, this.props.card) : api.card.post(this.props.card).then(function (response) {
+            metrika.reachGoal('CARD_CREATED');
+            return response;
+        }))
             .then(this.cardSubmitCallback)
             .catch(function (exception) {
                 this.setState({errors: exception.error});
