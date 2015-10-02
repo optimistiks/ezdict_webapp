@@ -27,6 +27,7 @@
   "cardIsLearnedLabel": "Изучена",
   "allCardsFilterLabel": "Все",
   "toStudyCardsFilterLabel": "Только изучаемые",
+  "isLearnedCardsFilterLabel": "Только изученные",
   "addToStudyCheckboxLabel": "Добавить в изучаемые",
   "correctQuizAnswerLabel": "Верно",
   "incorrectQuizAnswerLabel": "Неверно",

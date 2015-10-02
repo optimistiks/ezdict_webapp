@@ -15,6 +15,11 @@ module.exports = React.createClass({
     handleSubmit: function (e) {
         e.preventDefault();
         var text = this.refs['cardText'].getDOMNode().value;
+
+        if (!text) {
+            return;
+        }
+
         var params = this.getParams();
         params['id'] = text;
         this.transitionTo('card-form', params);

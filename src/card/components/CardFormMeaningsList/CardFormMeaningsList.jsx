@@ -7,6 +7,7 @@ var t = require('../../../common/modules/t');
 module.exports = React.createClass({
 
     getInitialState: function () {
+        //todo: this state is not needed here, uncontrolled input + refs will do the trick
         return {newMeaningText: ''};
     },
 
@@ -28,12 +29,27 @@ module.exports = React.createClass({
     },
 
     handleAddMeaningClick: function () {
+
+        if (!this.state.newMeaningText) {
+            return;
+        }
+
         var cardMeanings = this.props.meanings;
-        //todo: DRY violation, move CardMeaning structure to model
-        cardMeanings.push({text: this.state.newMeaningText});
+
+        var foundSameMeaning = cardMeanings.filter(function (meaning) {
+            return meaning.text === this.state.newMeaningText;
+        }.bind(this));
+
+        // если такого значения еще нет, добавляем
+        if (foundSameMeaning.length === 0) {
+            //todo: DRY violation, move CardMeaning structure to model
+            cardMeanings.push({text: this.state.newMeaningText});
+        }
+
         this.setState({
             newMeaningText: ''
         });
+
         this.props.handleMeaningsChange(cardMeanings);
     },
 

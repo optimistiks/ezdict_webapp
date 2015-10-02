@@ -13,6 +13,7 @@
   "cardIsLearnedLabel": "Is learned",
   "allCardsFilterLabel": "All",
   "toStudyCardsFilterLabel": "To study only",
+  "isLearnedCardsFilterLabel": "Is learned only",
   "addToStudyCheckboxLabel": "Add to study",
   "correctQuizAnswerLabel": "Correct",
   "incorrectQuizAnswerLabel": "Incorrect",

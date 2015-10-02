@@ -20,43 +20,64 @@ module.exports = React.createClass({
 
     handleSubmit: function (e) {
         e.preventDefault();
-        (this.props.card.id ? api.card.put(this.props.card.id, this.props.card) : api.card.post(this.props.card).then(function (response) {
-            metrika.reachGoal('CARD_CREATED');
-            return response;
-        }))
+        this.createOrUpdateCard()
             .then(this.cardSubmitCallback)
             .catch(function (exception) {
                 this.setState({errors: exception.error});
             }.bind(this));
     },
 
+    createOrUpdateCard: function () {
+        if (this.props.card.id) {
+            return api.card.put(this.props.card.id, this.props.card);
+        } else {
+            return api.card.post(this.props.card)
+                .then(function (response) {
+                    metrika.reachGoal('CARD_CREATED');
+                    return response;
+                })
+        }
+    },
+
     cardSubmitCallback: function (card) {
+        // получаем id значений которые нужно будет удалить
         var idsToDelete = this.state.meaningsToDelete.map(function (meaning) {
             return meaning.id;
         });
 
+        // получаем массив моделей новых значений (те что без id)
         var newMeanings = this.props.meanings.filter(function (meaning) {
             return !meaning.id;
         });
 
+        // проставляем всем новым значениям id карточки
         newMeanings = newMeanings.map(function (card, meaning) {
             meaning.card = card.id;
             return meaning;
         }.bind(this, card));
 
         var createNewMeanings = function (newMeanings) {
-            api.meaning.post(newMeanings).then(function () {
-                if (this.state.addToStudy) {
-                    api.toStudy.post({card: card.id}).then(function () {
-                        this.transitionTo('card', this.getParams());
-                    }.bind(this))
-                } else {
+            // создаем новые значения
+            api.meaning.post(newMeanings)
+                .then(function (response) {
+                    if (this.state.addToStudy) {
+                        // если стоит чекбокс "добавить в изучаемые", добавляем
+                        // todo: можно сделать параллельно с запросом на значения (после создания карточки)
+                        return api.toStudy.post({card: card.id}).then(function () {
+                            return response
+                        });
+                    } else {
+                        return response;
+                    }
+                }.bind(this))
+                .then(function () {
+                    // после всех запросов редирект на список
                     this.transitionTo('card', this.getParams());
-                }
-            }.bind(this));
+                }.bind(this));
         }.bind(this, newMeanings);
 
         if (idsToDelete.length) {
+            // если есть значения которые нужно удалить, удаляем, затем создаем новые
             api.meaning.deleteBatch(idsToDelete).then(createNewMeanings);
         } else {
             createNewMeanings();
