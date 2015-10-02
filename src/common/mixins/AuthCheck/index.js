@@ -9,7 +9,7 @@ module.exports = {
           props();
         })
         .fail(function () {
-          transition.redirect('promo', params);
+          transition.redirect('login', params);
           props();
         });
     }

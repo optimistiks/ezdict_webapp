@@ -33,7 +33,7 @@ chromeExtension.saveToken = function (token) {
 
 var app = null;
 
-if (window.chrome) {
+if (global.chrome && global.chrome.runtime) {
     app = chromeExtension;
 }
 
