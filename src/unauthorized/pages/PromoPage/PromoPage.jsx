@@ -13,12 +13,10 @@ module.exports = React.createClass({
                 <div className="col-xs-12">
                     <div className="jumbotron">
                         <h1>{t('jumbotronHeader')}</h1>
-                        <p>some cool text</p>
-                        <ol>
-                            <li>Установите расширение для вашего браузера.</li>
-                            <li>Установите расширение для вашего браузера.</li>
-                        </ol>
-                        <p><a className="btn btn-info btn-lg" href="#" role="button">Learn more</a></p>
+                        <p>Персональный интерактивный словарь.</p>
+                        <p>
+                            <a className="btn btn-success btn-lg" href="#" role="button">{t('Register')}</a>
+                        </p>
                     </div>
                 </div>
             </div>
