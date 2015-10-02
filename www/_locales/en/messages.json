@@ -29,5 +29,6 @@
   "errorPopupHeader": "There was an error.",
   "noQuizzesText": "You don't have any quizzes yet. Create some cards first, and add them to study.",
   "noCardsText": "You don't have any cards yet.",
-  "createCardButtonText": "Create card"
+  "createCardButtonText": "Create card",
+  "jumbotronHeader": "Welcome to название!"
 }

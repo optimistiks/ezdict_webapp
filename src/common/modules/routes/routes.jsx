@@ -15,6 +15,7 @@ var CardFormPage = require('../../../card/pages/CardFormPage/CardFormPage.jsx');
 var UserProfilePage = require('../../../profile/pages/UserProfilePage/UserProfilePage.jsx');
 var LoginPage = require('../../../unauthorized/pages/LoginPage/LoginPage.jsx');
 var RegistrationPage = require('../../../unauthorized/pages/RegistrationPage/RegistrationPage.jsx');
+var PromoPage = require('../../../unauthorized/pages/PromoPage/PromoPage.jsx');
 var App = require('../../../common/components/App/App.jsx');
 
 var config = require('../../../../config');
@@ -62,6 +63,7 @@ var routes = (
             <Route name="profile" handler={UserProfilePage}/>
             <Route name="login" handler={LoginPage}/>
             <Route name="register" handler={RegistrationPage}/>
+            <Route name="promo" handler={PromoPage}/>
             <Redirect from="/:lng" to="card"/>
             <NotFoundRoute handler={NotFoundRouteHandler}/>
         </Route>
