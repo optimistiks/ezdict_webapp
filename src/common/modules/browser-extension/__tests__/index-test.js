@@ -6,6 +6,7 @@ describe('browser-extension', function () {
 
     var browserExtension = require('../index.js');
 
+    expect(browserExtension).toBeDefined();
     expect(browserExtension).toBeNull();
 
   });
@@ -16,6 +17,7 @@ describe('browser-extension', function () {
 
     var browserExtension = require('../index.js');
 
+    expect(browserExtension).toBeDefined();
     expect(browserExtension).not.toBeNull();
 
     global.chrome = undefined;
