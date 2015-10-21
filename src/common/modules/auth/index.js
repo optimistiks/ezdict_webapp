@@ -29,23 +29,26 @@ auth.saveTokenFromExtension = function () {
 };
 
 auth.isLoggedIn = function () {
-    var def = $.Deferred();
+
     if (this.userInfo) {
-        def.resolve();
+        return Promise.resolve(this.userInfo);
     } else {
-        this.saveTokenFromExtension()
-            .finally(function () {
-                api.getUserInfo()
-                    .then(function (userInfo) {
-                        this.userInfo = userInfo;
-                        def.resolve();
-                    }.bind(this))
-                    .catch(function () {
-                        def.reject();
-                    })
-            }.bind(this));
+
+        return this.saveTokenFromExtension()
+
+          .finally(function() {
+              return api.getUserInfo();
+          })
+
+          .then(function(userInfo) {
+
+              this.userInfo = userInfo;
+              return userInfo;
+
+          }.bind(this))
+
     }
-    return def.promise();
+
 };
 
 auth.logout = function () {

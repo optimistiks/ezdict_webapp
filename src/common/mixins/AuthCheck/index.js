@@ -5,10 +5,10 @@ module.exports = {
   statics: {
     willTransitionTo: function (transition, params, query, props) {
       auth.isLoggedIn()
-        .done(function () {
+        .then(function () {
           props();
         })
-        .fail(function () {
+        .catch(function () {
           transition.redirect('login', params);
           props();
         });
