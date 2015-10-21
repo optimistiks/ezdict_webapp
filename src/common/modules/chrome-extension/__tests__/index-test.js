@@ -35,41 +35,68 @@ describe('chrome-extension', function () {
 
     });
 
-    it('should resolve the promise when the token is found', function (done) {
+    it('should resolve the promise when the token is found', function () {
 
         global.chrome.runtime.sendMessage = function (extensionId, payload, callback) {
-            console.log('set timeout');
-            setTimeout(function () {
-                console.log('timeout');
-                callback.apply(this, ['some_token']);
-            }, 1000)
+            callback.apply(this, ['some_token']);
         };
 
         var promise = chromeExtension.getToken();
 
-        promise
-            .then(function (token) {
-                expect(token).toEqual('some_tokens');
-            })
-            .finally(done);
+        expect(promise.isFulfilled()).toEqual(true);
 
     });
 
-    it('should reject the promise when the token is not found', function (done) {
+    it('should reject the promise when the token is not found', function () {
 
         global.chrome.runtime.sendMessage = function (extensionId, payload, callback) {
-            setTimeout(function () {
-                callback.apply(this, [null]);
-            }, 1000)
+            callback.apply(this, [null]);
         };
 
         var promise = chromeExtension.getToken();
 
-        promise
-            .catch(function () {
-                expect(promise.isRejected()).toBeFalsy();
-            })
-            .finally(done);
+        expect(promise.isRejected()).toEqual(true);
+
+    });
+
+    it('should call chrome.runtime.sendMessage with proper arguments when saving a token', function () {
+
+      spyOn(global.chrome.runtime, 'sendMessage');
+
+      chromeExtension.saveToken('some_token');
+
+      var config = require('../../../../../config');
+
+      expect(global.chrome.runtime.sendMessage).toHaveBeenCalledWith(
+        config.chromeExtensionId,
+        {saveToken: 'some_token'},
+        function () {
+        }
+      );
+
+    });
+
+    it('should resolve the promise when the token is saved', function () {
+
+      global.chrome.runtime.sendMessage = function (extensionId, payload, callback) {
+        callback.apply(this, [payload.saveToken]);
+      };
+
+      var promise = chromeExtension.saveToken('some_token');
+
+      expect(promise.isFulfilled()).toEqual(true);
+
+    });
+
+    it('should reject the promise when the token is not saved', function () {
+
+      global.chrome.runtime.sendMessage = function (extensionId, payload, callback) {
+        callback.apply(this, [null]);
+      };
+
+      var promise = chromeExtension.saveToken('some_token');
+
+      expect(promise.isRejected()).toEqual(true);
 
     });
 

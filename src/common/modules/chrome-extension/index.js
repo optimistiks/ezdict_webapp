@@ -8,9 +8,7 @@ var chromeExtension = {
 chromeExtension.getToken = function () {
     var deferred = Promise.pending();
     chrome.runtime.sendMessage(this.extensionId, {getToken: true}, function (token) {
-        console.log('in callback', token);
         if (token) {
-            console.log('resolving promise with', token);
             deferred.resolve(token);
         } else {
             deferred.reject('Can\'t get token from chrome extension.');
