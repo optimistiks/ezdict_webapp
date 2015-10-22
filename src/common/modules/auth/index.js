@@ -22,8 +22,8 @@ auth.saveTokenFromExtension = function () {
     } else {
         var deferred = Promise.pending();
         deferred.reject();
-        return deferred.promise.catch(function (exception) {
-            console.error(exception);
+        return deferred.promise.catch(function () {
+            console.info('Browser extension is not detected.');
         });
     }
 };
@@ -36,16 +36,10 @@ auth.isLoggedIn = function () {
 
         return this.saveTokenFromExtension()
 
-          .finally(function() {
-              return api.getUserInfo();
-          })
-
-          .then(function(userInfo) {
-
+          .finally(() => api.getUserInfo().then((userInfo) => {
               this.userInfo = userInfo;
               return userInfo;
-
-          }.bind(this))
+          }));
 
     }
 

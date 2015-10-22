@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "browserify": "NODE_ENV='production' browserify index.js --ignore-missing --debug -t babelify --outfile www/dist/bundle.js  -p [ parcelify -o www/dist/bundle.css  ]",
+    "browserify": "NODE_ENV='production' browserify index.js --ignore-missing -t babelify --outfile www/dist/bundle.js -p [ parcelify -o www/dist/bundle.css  ]",
     "uglify": "uglifyjs www/dist/bundle.js --compress --mangle --output www/dist/bundle.js",
     "discify": "browserify index.js --full-paths --ignore-missing -t babelify --outfile discify/bundle.js && discify discify/bundle.js --output discify/disc.html",
     "build": "npm run browserify && npm run uglify",
