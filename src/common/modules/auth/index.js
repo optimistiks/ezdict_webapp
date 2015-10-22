@@ -1,6 +1,3 @@
-//todo: избавиться от deferred
-
-var $ = require('jquery');
 var Promise = require('bluebird');
 
 var api = require('../api');
@@ -20,10 +17,8 @@ auth.saveTokenFromExtension = function () {
             console.info('Can\'t get token from extension.');
         });
     } else {
-        var deferred = Promise.pending();
-        deferred.reject();
-        return deferred.promise.catch(function () {
-            console.info('Browser extension is not detected.');
+        return Promise.reject().catch(function () {
+            console.info('Browser extension was not detected.');
         });
     }
 };
