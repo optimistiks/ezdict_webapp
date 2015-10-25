@@ -17,6 +17,7 @@
     "bluebird": "~2.9.34",
     "bootstrap": "^3.3.5",
     "ezdict-api-client": "git://github.com/optimistiks/ezdict_api_client#master",
+    "flux": "^2.1.1",
     "i18next-client": "^1.10.2",
     "jquery": "^2.1.4",
     "moment": "^2.10.6",

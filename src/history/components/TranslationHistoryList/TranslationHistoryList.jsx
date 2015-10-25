@@ -4,44 +4,33 @@ var moment = require('moment');
 var t = require('../../../common/modules/t');
 var api = require('../../../common/modules/api');
 
+var historyStore = require('../../modules/history-store');
+var historyActions = require('../../modules/history-actions');
+
 module.exports = React.createClass({
 
-    next: 1,
-
-    loadHistories: function () {
-        api.getTranslationHistory(this.next)
-            .then(function (response) {
-                if (!this.isMounted()) {
-                    return false;
-                }
-
-                if (response.next) {
-                    ++this.next;
-                } else {
-                    this.next = null;
-                }
-
-                this.setState({
-                    histories: this.state.histories.concat(response.results)
-                });
-            }.bind(this)).catch(function (exception) {
-                console.error(exception);
-            });
+    getInitialState: function () {
+        return {histories: historyStore.getAll()};
     },
 
-    getInitialState: function () {
-        return {histories: []};
+    historyChanged () {
+        this.setState({histories: historyStore.getAll()});
     },
 
     componentDidMount: function () {
-        this.loadHistories();
+        historyStore.on('change', this.historyChanged);
+        historyActions.load();
+    },
+
+    componentWillUnmount: function () {
+        historyStore.removeListener('change', this.historyChanged);
     },
 
     render: function () {
 
         var historyNodes = this.state.histories.map(function (history) {
             return (
-                <li>
+                <li key={history.id}>
                     <ul className="list-inline">
                         <li>{history.string}</li>
                         <li><span
@@ -53,9 +42,9 @@ module.exports = React.createClass({
             );
         });
 
-        var moreButton = this.next ?
+        var moreButton = historyStore.getPage() ?
             <button type="button" className="btn btn-default btn-block"
-                    onClick={this.loadHistories}>{t('More')}</button>
+                    onClick={historyActions.load}>{t('More')}</button>
             : undefined;
 
         return (
