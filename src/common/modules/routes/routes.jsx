@@ -1,8 +1,7 @@
 var React = require('react');
 
 var Router = require('react-router');
-var DefaultRoute = Router.DefaultRoute;
-var NotFoundRoute = Router.NotFoundRoute;
+var IndexRoute = Router.IndexRoute;
 var Redirect = Router.Redirect;
 var Route = Router.Route;
 var RouteHandler = Router.RouteHandler;
@@ -53,19 +52,19 @@ var NotFoundRouteHandler = React.createClass({
 
 var routes = (
     <Route path="/">
-        <DefaultRoute handler={RedirectToDefaultLng}/>
-        <Route name="app" path=":lng" handler={App}>
-            <Route name="history" handler={TranslationHistoryPage}/>
-            <Route name="quiz" handler={QuizPage}/>
-            <Route name="quiz-form" path="quiz/:id" handler={QuizFormPage}/>
-            <Route name="card" handler={CardPage}/>
-            <Route name="card-form" path="card/:id" handler={CardFormPage}/>
-            <Route name="profile" handler={UserProfilePage}/>
-            <Route name="login" handler={LoginPage}/>
-            <Route name="register" handler={RegistrationPage}/>
-            <Route name="promo" handler={PromoPage}/>
+        <IndexRoute component={RedirectToDefaultLng}/>
+        <Route path=":lng" component={App}>
+            <Route path="history" component={TranslationHistoryPage}/>
+            <Route path="quiz" component={QuizPage}/>
+            <Route path="quiz/:id" component={QuizFormPage}/>
+            <Route path="card" component={CardPage}/>
+            <Route path="card/:id" component={CardFormPage}/>
+            <Route path="profile" component={UserProfilePage}/>
+            <Route path="login" component={LoginPage}/>
+            <Route path="register" component={RegistrationPage}/>
+            <Route path="promo" component={PromoPage}/>
             <Redirect from="/:lng" to="card"/>
-            <NotFoundRoute handler={NotFoundRouteHandler}/>
+            <Route path="*" component={NotFoundRouteHandler}/>
         </Route>
     </Route>
 );

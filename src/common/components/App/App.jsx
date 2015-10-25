@@ -1,9 +1,10 @@
 var React = require('react');
 var Router = require('react-router');
-var RouteHandler = Router.RouteHandler;
 var NavBar = require('../../../navbar/components/NavBar/NavBar.jsx');
 var appEventEmitter = require('../../../common/modules/event-emitter');
 var t = require('../../../common/modules/t');
+var routeParamsActions = require('../../modules/route-params-actions');
+
 
 module.exports = React.createClass({
 
@@ -32,6 +33,14 @@ module.exports = React.createClass({
         this.setState({errors: []});
     },
 
+    componentWillMount () {
+        routeParamsActions.change(this.props.params);
+    },
+
+    componentWillReceiveProps (nextProps) {
+        routeParamsActions.change(nextProps.params);
+    },
+
     render: function () {
 
         var errorsBlock = null;
@@ -57,7 +66,7 @@ module.exports = React.createClass({
             <div className="container-fluid">
                 <NavBar/>
                 {errorsBlock}
-                <RouteHandler/>
+                {this.props.children}
                 <hr/>
             </div>
         );

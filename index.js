@@ -1,14 +1,22 @@
 global.jQuery = require('jquery');
+
 require('bootstrap');
 require('./src/common/modules/ya-metrika');
+
 var React = require('react');
-var Router = require('react-router');
+var ReactDOM = require('react-dom');
+var Router = require('react-router').Router;
+
 var i18n = require('./src/common/modules/i18n');
 var routes = require('./src/common/modules/routes/routes.jsx');
 var config = require('./config');
 var api = require('./src/common/modules/api');
 
 
+ReactDOM.render(<Router>{routes}</Router>, document.getElementById('content'));
+
+
+/*
 var render = function (Handler) {
     React.render(<Handler/>, document.getElementById('content'));
 };
@@ -23,3 +31,4 @@ Router.run(routes, function (Handler, state) {
         render(Handler);
     }
 });
+*/
