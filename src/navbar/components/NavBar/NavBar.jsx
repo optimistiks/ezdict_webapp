@@ -7,13 +7,35 @@ var NavControls = require('./NavControls/NavControls.jsx');
 var LanguageSwitcher = require('./LanguageSwitcher/LanguageSwitcher.jsx');
 
 var auth = require('../../../common/modules/auth');
+var routeParamsStore = require('../../../common/modules/route-params-store');
 
 
 module.exports = React.createClass({
+
+    getInitialState () {
+        return {lng: routeParamsStore.getLng()}
+    },
+
+    componentWillMount () {
+        routeParamsStore.on('change', this.handleRouteParamsChange);
+    },
+
+    componentWillUnmount: function () {
+        routeParamsStore.removeListener('change', this.handleRouteParamsChange);
+    },
+
+    handleRouteParamsChange () {
+        if (this.state.lng !== routeParamsStore.getLng()) {
+            this.setState({
+                lng: routeParamsStore.getLng()
+            });
+        }
+    },
+
     render: function () {
         var controls;
         if (auth.getUserInfo()) {
-            controls = <NavControls userInfo={auth.getUserInfo()}/>;
+            controls = <NavControls userInfo={auth.getUserInfo()} lng={this.state.lng}/>;
         }
         return (
             <nav className="navbar navbar-default">
@@ -31,7 +53,7 @@ module.exports = React.createClass({
 
                 <div className="collapse navbar-collapse" id="navbar-collapse">
                     {controls}
-                    <LanguageSwitcher />
+                    <LanguageSwitcher lng={this.state.lng} />
                 </div>
             </nav>
         );

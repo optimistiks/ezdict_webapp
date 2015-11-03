@@ -1,12 +1,9 @@
 var React = require('react');
 
-var NonAuthCheck = require('../../../common/mixins/NonAuthCheck');
 var RegistrationForm = require('../../../unauthorized/components/RegistrationForm/RegistrationForm.jsx');
 
 
 module.exports = React.createClass({
-
-    mixins: [NonAuthCheck],
 
     render: function () {
         return (

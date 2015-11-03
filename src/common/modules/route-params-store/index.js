@@ -6,8 +6,8 @@ var routeParamsStore = Object.assign({}, EventEmitter.prototype, {
 
     params: {},
 
-    getParams () {
-        return this.params;
+    getLng () {
+        return this.params.lng;
     },
 
     setParams (params) {
@@ -28,5 +28,7 @@ dispatcher.register(function (payload) {
     }
     return true; // Needed for Flux promise resolution
 });
+
+routeParamsStore.setMaxListeners(0);
 
 module.exports = routeParamsStore;

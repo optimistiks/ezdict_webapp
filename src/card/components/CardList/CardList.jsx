@@ -67,7 +67,7 @@ module.exports = React.createClass({
                     }
 
                     return (
-                        <Link to="card-form" params={{id: card.id}} className="list-group-item">
+                        <Link key={card.id} to={'card/' + card.id} className="list-group-item">
                             <h4 className="list-group-item-heading">{card.text}</h4>
                             <p className="list-group-item-text">{card.article}</p>
                             {toStudyLabel}{isLearnedLabel}
@@ -90,7 +90,8 @@ module.exports = React.createClass({
                                         <input type="radio" name="cardFilter" value=""
                                                checked={!this.state.cardFilter}
                                                onChange={this.onFilterRadioChange}
-                                        >{t('allCardsFilterLabel')}</input>
+                                        />
+                                        {t('allCardsFilterLabel')}
                                     </label>
                                 </li>
                                 <li>
@@ -98,7 +99,8 @@ module.exports = React.createClass({
                                         <input type="radio" name="cardFilter" value="to_study"
                                                checked={this.state.cardFilter === 'to_study'}
                                                onChange={this.onFilterRadioChange}
-                                        >{t('toStudyCardsFilterLabel')}</input>
+                                        />
+                                        {t('toStudyCardsFilterLabel')}
                                     </label>
                                 </li>
                                 <li>
@@ -106,7 +108,8 @@ module.exports = React.createClass({
                                         <input type="radio" name="cardFilter" value="is_learned"
                                                checked={this.state.cardFilter === 'is_learned'}
                                                onChange={this.onFilterRadioChange}
-                                        >{t('isLearnedCardsFilterLabel')}</input>
+                                        />
+                                        {t('isLearnedCardsFilterLabel')}
                                     </label>
                                 </li>
                             </ul>

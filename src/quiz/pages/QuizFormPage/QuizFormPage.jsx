@@ -1,9 +1,6 @@
 var React = require('react');
 
 var Router = require('react-router');
-var State = Router.State;
-
-var AuthCheck = require('../../../common/mixins/AuthCheck');
 
 var QuizForm = require('../../components/QuizForm/QuizForm.jsx');
 var QuizCompletedView = require('../../components/QuizCompletedView/QuizCompletedView.jsx');
@@ -13,8 +10,6 @@ var api = require('../../../common/modules/api');
 
 
 module.exports = React.createClass({
-
-    mixins: [AuthCheck, State],
 
     getInitialState: function () {
         return {quiz: {quiz_cards: []}, quizAnswers: []};

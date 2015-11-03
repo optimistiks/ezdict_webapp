@@ -1,7 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
-var Navigation = Router.Navigation;
-var State = Router.State;
+var History = Router.History;
 
 var api = require('../../../common/modules/api');
 var t = require('../../../common/modules/t');
@@ -12,7 +11,7 @@ var CardFormMeaningsList = require('../CardFormMeaningsList/CardFormMeaningsList
 
 module.exports = React.createClass({
 
-    mixins: [Navigation, State],
+    mixins: [History],
 
     getInitialState: function () {
         return {errors: {}, meaningsToDelete: [], addToStudy: false};
@@ -72,7 +71,7 @@ module.exports = React.createClass({
                 }.bind(this))
                 .then(function () {
                     // после всех запросов редирект на список
-                    this.transitionTo('card', this.getParams());
+                    this.history.pushState(null, '/:lng/card');
                 }.bind(this));
         }.bind(this, newMeanings);
 
@@ -125,7 +124,8 @@ module.exports = React.createClass({
                     <input type="checkbox"
                            checked={this.state.addToStudy}
                            onChange={this.handleAddToStudyChange}
-                    >{t('addToStudyCheckboxLabel')}</input>
+                    />
+                    {t('addToStudyCheckboxLabel')}
                 </label>
             </div>)
         }

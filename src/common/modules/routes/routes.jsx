@@ -1,10 +1,10 @@
 var React = require('react');
+var ReactRouter = require('react-router');
 
-var Router = require('react-router');
-var IndexRoute = Router.IndexRoute;
-var Redirect = Router.Redirect;
-var Route = Router.Route;
-var RouteHandler = Router.RouteHandler;
+var Router = ReactRouter.Router;
+var IndexRoute = ReactRouter.IndexRoute;
+var Redirect = ReactRouter.Redirect;
+var Route = ReactRouter.Route;
 
 var TranslationHistoryPage = require('../../../history/pages/TranslationHistoryPage/TranslationHistoryPage.jsx');
 var QuizPage = require('../../../quiz/pages/QuizPage/QuizPage.jsx');
@@ -18,55 +18,60 @@ var PromoPage = require('../../../unauthorized/pages/PromoPage/PromoPage.jsx');
 var App = require('../../../common/components/App/App.jsx');
 
 var config = require('../../../../config');
+var auth = require('../../modules/auth');
 
 /**
  * "/" => "/defaultLng"
  */
-var RedirectToDefaultLng = React.createClass({
-    statics: {
-        willTransitionTo (transition, params) {
-            transition.redirect('app', {lng: config.defaultLng});
-        }
-    },
-    render: function () {
-        return null;
-    }
-});
+//todo
 
 /**
  * "/not/found/route" => "/defaultLng/not/found/route"
  */
-var NotFoundRouteHandler = React.createClass({
-    statics: {
-        willTransitionTo (transition, params) {
-            if (config.supportedLngs.indexOf(params.lng) === -1) {
-                var newPath = '/' + config.defaultLng + transition.path;
-                transition.redirect(newPath);
-            }
-        }
-    },
-    render: function () {
-        return null;
-    }
-});
+//todo
+
+var checkIsLoggedIn = function(nextState, transition, callback) {
+    auth.isLoggedIn()
+        .then(function () {
+            callback();
+        })
+        .catch(function () {
+            transition({nextPathname: nextState.location.pathname}, '/:lng/login'.replace(':lng', nextState.params.lng));
+            callback();
+        });
+};
+var checkIsNotLoggedIn = function(nextState, transition, callback) {
+    auth.isLoggedIn()
+        .then(function () {
+            transition({nextPathname: nextState.location.pathname}, '/:lng/card'.replace(':lng', nextState.params.lng));
+            callback();
+        })
+        .catch(function () {
+            callback();
+        });
+};
+
 
 var routes = (
-    <Route path="/">
-        <IndexRoute component={RedirectToDefaultLng}/>
-        <Route path=":lng" component={App}>
-            <Route path="history" component={TranslationHistoryPage}/>
-            <Route path="quiz" component={QuizPage}/>
-            <Route path="quiz/:id" component={QuizFormPage}/>
-            <Route path="card" component={CardPage}/>
-            <Route path="card/:id" component={CardFormPage}/>
-            <Route path="profile" component={UserProfilePage}/>
-            <Route path="login" component={LoginPage}/>
-            <Route path="register" component={RegistrationPage}/>
-            <Route path="promo" component={PromoPage}/>
-            <Redirect from="/:lng" to="card"/>
-            <Route path="*" component={NotFoundRouteHandler}/>
+    <Router>
+        <Route path="/">
+            <Route path=":lng" component={App}>
+                <Route onEnter={checkIsNotLoggedIn}>
+                    <Route path="login" component={LoginPage}/>
+                    <Route path="register" component={RegistrationPage}/>
+                    <Route path="promo" component={PromoPage}/>
+                </Route>
+                <Route onEnter={checkIsLoggedIn}>
+                    <Route path="history" component={TranslationHistoryPage}/>
+                    <Route path="quiz" component={QuizPage}/>
+                    <Route path="quiz/:id" component={QuizFormPage}/>
+                    <Route path="card" component={CardPage}/>
+                    <Route path="card/:id" component={CardFormPage}/>
+                    <Route path="profile" component={UserProfilePage}/>
+                </Route>
+            </Route>
         </Route>
-    </Route>
+    </Router>
 );
 
 module.exports = routes;

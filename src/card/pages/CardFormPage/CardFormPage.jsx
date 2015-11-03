@@ -1,12 +1,8 @@
 var React = require('react');
 
 var Router = require('react-router');
-var Navigation = Router.Navigation;
-var State = Router.State;
 
-var AuthCheck = require('../../../common/mixins/AuthCheck');
 var Form = require('../../../common/mixins/Form');
-
 var CardPossibleMeaningsList = require('../../components/CardPossibleMeaningsList/CardPossibleMeaningsList.jsx');
 var CardForm = require('../../components/CardForm/CardForm.jsx');
 
@@ -16,7 +12,7 @@ var api = require('../../../common/modules/api');
 
 module.exports = React.createClass({
 
-    mixins: [AuthCheck, Navigation, State, Form],
+    mixins: [Form],
 
     getInitialState: function () {
         return {card: {}, meanings: []};

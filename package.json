@@ -21,7 +21,7 @@
     "i18next-client": "^1.10.2",
     "jquery": "^2.1.4",
     "moment": "^2.10.6",
-    "react": "^0.14.0",
+    "react": "^0.14.2",
     "react-dom": "^0.14.0",
     "react-router": "1.0.0-rc3"
   },
@@ -42,7 +42,10 @@
   "jest": {
     "scriptPreprocessor": "node_modules/babel-jest",
     "unmockedModulePathPatterns": [
-      "node_modules/react"
+      "node_modules/react",
+      "node_modules/react-dom",
+      "node_modules/react-addons-test-utils",
+      "node_modules/fbjs"
     ]
   }
 }

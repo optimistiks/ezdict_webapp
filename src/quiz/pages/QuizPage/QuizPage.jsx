@@ -1,11 +1,9 @@
 var React = require('react');
-var AuthCheck = require('../../../common/mixins/AuthCheck');
 var QuizList = require('../../components/QuizList/QuizList.jsx');
 var t = require('../../../common/modules/t');
 var Button = require('../../../common/components/Button/Button.jsx');
 var Router = require('react-router');
-var Navigation = Router.Navigation;
-var State = Router.State;
+var History = Router.History;
 var api = require('../../../common/modules/api');
 var metrika = require('../../../common/modules/ya-metrika');
 var appEventEmitter = require('../../../common/modules/event-emitter');
@@ -13,7 +11,7 @@ var appEventEmitter = require('../../../common/modules/event-emitter');
 
 module.exports = React.createClass({
 
-    mixins: [AuthCheck, Navigation, State],
+    mixins: [History],
 
     getInitialState: function () {
         return {requestInProgress: false};
@@ -24,9 +22,7 @@ module.exports = React.createClass({
         var data = {type: type};
         api.quizzes.post(data).then(function (quiz) {
             metrika.reachGoal('QUIZ_CREATED', {type: quiz.type});
-            var params = this.getParams();
-            params['id'] = quiz.id;
-            this.transitionTo('quiz-form', params);
+            this.history.pushState(null, '/:lng/quiz/' + quiz.id);
         }.bind(this)).catch(function (exception) {
             appEventEmitter.emitRequestException(exception)
         }).finally(function () {

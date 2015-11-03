@@ -14,6 +14,10 @@ var AppEventEmitter = function () {
     this.onRequestException = function (handler) {
         this.on(eventRepository.REQUEST_EXCEPTION, handler);
     };
+
+    this.offRequestException = function (handler) {
+        this.removeListener(eventRepository.REQUEST_EXCEPTION, handler);
+    };
 };
 
 util.inherits(AppEventEmitter, events.EventEmitter);

@@ -12,33 +12,35 @@ module.exports = React.createClass({
         return {errors: []};
     },
 
-    componentDidMount: function () {
-
-        appEventEmitter.onRequestException(function (exception) {
-
-            var errors = [];
-
-            Object.keys(exception.error).forEach(function (key) {
-                errors.push(exception.error[key]);
-            }.bind(this));
-
-            this.setState({
-                errors: errors
-            });
-
-        }.bind(this));
-    },
-
-    clearErrors: function () {
-        this.setState({errors: []});
-    },
-
     componentWillMount () {
+        appEventEmitter.onRequestException(this.handleRequestException);
         routeParamsActions.change(this.props.params);
     },
 
     componentWillReceiveProps (nextProps) {
         routeParamsActions.change(nextProps.params);
+    },
+
+    componentWillUnmount: function () {
+        appEventEmitter.offRequestException(this.handleRequestException);
+    },
+
+    handleRequestException: function (exception) {
+
+        var errors = [];
+
+        Object.keys(exception.error).forEach(function (key) {
+            errors.push(exception.error[key]);
+        }.bind(this));
+
+        this.setState({
+            errors: errors
+        });
+
+    },
+
+    clearErrors: function () {
+        this.setState({errors: []});
     },
 
     render: function () {

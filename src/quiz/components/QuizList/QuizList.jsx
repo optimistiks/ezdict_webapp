@@ -25,7 +25,7 @@ module.exports = React.createClass({
                 }
 
                 return (
-                    <Link to="quiz-form" params={{id: quiz.id}} className="list-group-item">
+                    <Link key={quiz.id} to={'quiz/' + quiz.id} className="list-group-item">
                         <h4 className="list-group-item-heading">{t('quizListItemHeader')} #{quiz.id}</h4>
                         <div className="list-group-item-text">{quizTypeLabel} {quizCreatedLabel} {quizCompletedLabel}</div>
                     </Link>

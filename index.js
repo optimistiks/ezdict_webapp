@@ -13,7 +13,7 @@ var config = require('./config');
 var api = require('./src/common/modules/api');
 
 
-ReactDOM.render(<Router>{routes}</Router>, document.getElementById('content'));
+ReactDOM.render(routes, document.getElementById('content'));
 
 
 /*

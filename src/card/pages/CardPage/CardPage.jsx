@@ -1,8 +1,6 @@
 var React = require('react');
 var Router = require('react-router');
-var Navigation = Router.Navigation;
-var State = Router.State;
-var AuthCheck = require('../../../common/mixins/AuthCheck');
+var History = Router.History;
 var CardList = require('../../components/CardList/CardList.jsx');
 var Link = require('../../../common/components/Link/Link.jsx');
 var t = require('../../../common/modules/t');
@@ -10,19 +8,17 @@ var t = require('../../../common/modules/t');
 
 module.exports = React.createClass({
 
-    mixins: [AuthCheck, Navigation, State],
+    mixins: [History],
 
     handleSubmit: function (e) {
         e.preventDefault();
-        var text = this.refs['cardText'].getDOMNode().value;
+        var text = this.refs['cardText'].value;
 
         if (!text) {
             return;
         }
 
-        var params = this.getParams();
-        params['id'] = text;
-        this.transitionTo('card-form', params);
+        this.history.pushState(null, '/:lng/card/' + text);
     },
 
     render: function () {

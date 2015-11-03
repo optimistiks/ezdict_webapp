@@ -7,8 +7,8 @@ module.exports = React.createClass({
     render: function () {
         return (
             <ul className="nav navbar-nav pull-right">
-                <NavLi to="app" params={{lng: 'ru'}}>RU</NavLi>
-                <NavLi to="app" params={{lng: 'en'}}>EN</NavLi>
+                <NavLi to="/" lng="ru">RU</NavLi>
+                <NavLi to="/" lng="en">EN</NavLi>
             </ul>
         );
     }
