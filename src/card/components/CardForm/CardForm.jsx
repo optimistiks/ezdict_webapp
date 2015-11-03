@@ -5,6 +5,7 @@ var History = Router.History;
 var api = require('../../../common/modules/api');
 var t = require('../../../common/modules/t');
 var metrika = require('../../../common/modules/ya-metrika');
+var routeParamsStore = require('../../../common/modules/route-params-store');
 
 var CardFormMeaningsList = require('../CardFormMeaningsList/CardFormMeaningsList.jsx');
 
@@ -71,7 +72,7 @@ module.exports = React.createClass({
                 }.bind(this))
                 .then(function () {
                     // после всех запросов редирект на список
-                    this.history.pushState(null, '/:lng/card');
+                    this.history.pushState(null, '/:lng/card'.replace(':lng', routeParamsStore.getLng()));
                 }.bind(this));
         }.bind(this, newMeanings);
 

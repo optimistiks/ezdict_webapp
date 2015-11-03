@@ -49,8 +49,8 @@ module.exports = React.createClass({
 
         if (this.state.errors.length) {
 
-            let errorNodes = this.state.errors.map(function (error) {
-                return <p>{error}</p>
+            let errorNodes = this.state.errors.map(function (error, index) {
+                return <p key={index}>{error}</p>
             });
 
             errorsBlock = (

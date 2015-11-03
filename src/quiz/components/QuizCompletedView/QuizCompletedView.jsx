@@ -36,16 +36,16 @@ module.exports = React.createClass({
                 var answerTextContent = answer.text || t('quizAnswerNotGiven');
 
                 return (
-                    <li className="form-group">
+                    <li key={answer.id} className="form-group">
                         <p className={answerTextClass}>{answerTextContent} {isCorrectLabel}</p>
                     </li>
                 )
             }.bind(this));
 
             return (
-                <fieldset ref={'quizCard' + quizCard.id}>
+                <fieldset key={quizCard.id} ref={'quizCard' + quizCard.id}>
                     <div className="form-group">
-                        <label for="exampleInputEmail1">{quizCard.card.text}</label>
+                        <label htmlFor="exampleInputEmail1">{quizCard.card.text}</label>
                     </div>
                     <ol>
                         {answerNodes}

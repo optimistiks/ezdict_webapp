@@ -4,6 +4,7 @@ var History = Router.History;
 var CardList = require('../../components/CardList/CardList.jsx');
 var Link = require('../../../common/components/Link/Link.jsx');
 var t = require('../../../common/modules/t');
+var store = require('../../../common/modules/route-params-store');
 
 
 module.exports = React.createClass({
@@ -18,7 +19,7 @@ module.exports = React.createClass({
             return;
         }
 
-        this.history.pushState(null, '/:lng/card/' + text);
+        this.history.pushState(null, `/${store.getLng()}/card/${text}`);
     },
 
     render: function () {

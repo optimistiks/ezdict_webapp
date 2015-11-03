@@ -7,6 +7,7 @@ var History = Router.History;
 var api = require('../../../common/modules/api');
 var metrika = require('../../../common/modules/ya-metrika');
 var appEventEmitter = require('../../../common/modules/event-emitter');
+var store = require('../../../common/modules/route-params-store');
 
 
 module.exports = React.createClass({
@@ -22,7 +23,7 @@ module.exports = React.createClass({
         var data = {type: type};
         api.quizzes.post(data).then(function (quiz) {
             metrika.reachGoal('QUIZ_CREATED', {type: quiz.type});
-            this.history.pushState(null, '/:lng/quiz/' + quiz.id);
+            this.history.pushState(null, `/${store.getLng()}/quiz/${quiz.id}`);
         }.bind(this)).catch(function (exception) {
             appEventEmitter.emitRequestException(exception)
         }).finally(function () {
@@ -39,7 +40,9 @@ module.exports = React.createClass({
     },
 
     toggleButtons: function () {
-        this.setState({requestInProgress: !this.state.requestInProgress});
+        if (this.isMounted()) {
+            this.setState({requestInProgress: !this.state.requestInProgress});
+        }
     },
 
     render: function () {

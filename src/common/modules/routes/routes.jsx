@@ -19,6 +19,9 @@ var App = require('../../../common/components/App/App.jsx');
 
 var config = require('../../../../config');
 var auth = require('../../modules/auth');
+var api = require('../../modules/api');
+var i18n = require('../../modules/i18n');
+var routeParamsStore = require('../route-params-store');
 
 /**
  * "/" => "/defaultLng"
@@ -36,14 +39,16 @@ var checkIsLoggedIn = function(nextState, transition, callback) {
             callback();
         })
         .catch(function () {
-            transition({nextPathname: nextState.location.pathname}, '/:lng/login'.replace(':lng', nextState.params.lng));
+            var newPath = '/:lng/login'.replace(':lng', nextState.params.lng || routeParamsStore.getLng());
+            transition({nextPathname: nextState.location.pathname}, newPath);
             callback();
         });
 };
 var checkIsNotLoggedIn = function(nextState, transition, callback) {
     auth.isLoggedIn()
         .then(function () {
-            transition({nextPathname: nextState.location.pathname}, '/:lng/card'.replace(':lng', nextState.params.lng));
+            var newPath = '/:lng/card'.replace(':lng', nextState.params.lng || routeParamsStore.getLng());
+            transition({nextPathname: nextState.location.pathname}, newPath);
             callback();
         })
         .catch(function () {
@@ -51,15 +56,25 @@ var checkIsNotLoggedIn = function(nextState, transition, callback) {
         });
 };
 
+var prepareI18n = function(nextState, transition, callback) {
+
+    api.config.setLocale(nextState.params.lng);
+    i18n.setLng(nextState.params.lng, function () {
+        callback();
+    });
+
+};
+
 
 var routes = (
     <Router>
-        <Route path="/">
-            <Route path=":lng" component={App}>
+        <Route path="/" component={App}>
+            <IndexRoute component={RegistrationPage} onEnter={checkIsNotLoggedIn}/>
+            <Route path=":lng" onEnter={prepareI18n}>
+                <IndexRoute component={RegistrationPage} onEnter={checkIsNotLoggedIn}/>
                 <Route onEnter={checkIsNotLoggedIn}>
                     <Route path="login" component={LoginPage}/>
                     <Route path="register" component={RegistrationPage}/>
-                    <Route path="promo" component={PromoPage}/>
                 </Route>
                 <Route onEnter={checkIsLoggedIn}>
                     <Route path="history" component={TranslationHistoryPage}/>

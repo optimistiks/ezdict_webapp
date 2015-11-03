@@ -61,7 +61,7 @@ module.exports = React.createClass({
             meaningNodes = this.props.meanings.map(function (meaning, index) {
                 var boundClick = this.handleMeaningClick.bind(this, index);
                 return (
-                    <a href="#" className="list-group-item" onClick={boundClick}>{meaning.text}</a>
+                    <a key={index} href="#" className="list-group-item" onClick={boundClick}>{meaning.text}</a>
                 );
             }.bind(this));
 
