@@ -39,7 +39,7 @@ var checkIsLoggedIn = function(nextState, transition, callback) {
             callback();
         })
         .catch(function () {
-            var newPath = '/:lng/login'.replace(':lng', nextState.params.lng || routeParamsStore.getLng());
+            var newPath = '/:lng/register'.replace(':lng', nextState.params.lng || routeParamsStore.getLng());
             transition({nextPathname: nextState.location.pathname}, newPath);
             callback();
         });
@@ -65,6 +65,14 @@ var prepareI18n = function(nextState, transition, callback) {
 
 };
 
+var handleNotFoundRoute = function(nextState, transition) {
+    // if params.lng is undefined, or not from list of supported language, redirect to default lng
+    if (!nextState.params.lng || config.supportedLngs.indexOf(nextState.params.lng) === -1) {
+        var newPath = '/' + config.defaultLng + nextState.location.pathname;
+        transition({nextPathname: nextState.location.pathname}, newPath);
+    }
+};
+
 
 var routes = (
     <Router>
@@ -85,6 +93,7 @@ var routes = (
                     <Route path="profile" component={UserProfilePage}/>
                 </Route>
             </Route>
+            <Route path="*" onEnter={handleNotFoundRoute}/>
         </Route>
     </Router>
 );
