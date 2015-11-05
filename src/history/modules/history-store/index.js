@@ -2,9 +2,10 @@ var util = require('util');
 var EventEmitter = require('events').EventEmitter;
 var dispatcher = require('../../../common/modules/dispatcher');
 var api = require('../../../common/modules/api');
+var assign = require('object-assign');
 
 
-var historyStore = Object.assign({}, EventEmitter.prototype, {
+var historyStore = assign({}, EventEmitter.prototype, {
 
     page: 1,
 

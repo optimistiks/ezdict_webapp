@@ -1,9 +1,10 @@
 var EventEmitter = require('events').EventEmitter;
 var dispatcher = require('../../../common/modules/dispatcher');
 var config = require('../../../../config');
+var assign = require('object-assign');
 
 
-var routeParamsStore = Object.assign({}, EventEmitter.prototype, {
+var routeParamsStore = assign({}, EventEmitter.prototype, {
 
     params: {
         lng: config.defaultLng
